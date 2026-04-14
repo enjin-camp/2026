@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENJIN CAMP 2026 — 参加予定の皆様</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #5b3fa6;
+  --purple-light: #7b5ec7;
+  --teal: #0fb8a0;
+  --teal-dark: #0a8f7c;
+  --blue: #1a6fc4;
+  --white: #ffffff;
+  --off-white: #f0f4ff;
+  --text: #1a1a2e;
+  --muted: rgba(255,255,255,0.65);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #3b2a8a;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 背景 ── */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    170deg,
+    #3b2a8a 0%,
+    #2a4aad 35%,
+    #1a7abf 60%,
+    #0fb8a0 100%
+  );
+  pointer-events: none;
+}
+
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  pointer-events: none;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  position: relative;
+  z-index: 10;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  color: var(--white);
+}
+
+.logo span {
+  color: var(--teal);
+}
+
+.header-badge {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 5px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+/* ── ヒーロー ── */
+.hero {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 48px 40px 24px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-tag::before,
+.hero-tag::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--teal);
+  opacity: 0.6;
+}
+
+.hero h1 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: clamp(52px, 9vw, 96px);
+  letter-spacing: 0.06em;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.hero h1 .year {
+  color: var(--teal);
+}
+
+.hero-subtitle {
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.15em;
+  margin-bottom: 40px;
+}
+
+.count-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.count-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 12px 28px;
+  background: rgba(255,255,255,0.05);
+}
+
+.count-num {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.05em;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.count-unit {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.count-label {
+  padding: 12px 20px;
+  background: rgba(15,184,160,0.12);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+/* ── ステータス ── */
+.status-row {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 24px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.4s;
+}
+
+.dot.live {
+  background: var(--teal);
+  animation: blink 2s infinite;
+}
+
+.dot.loading { background: #f0c040; }
+.dot.error   { background: #e24b4a; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── グリッド ── */
+.grid-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2px;
+}
+
+/* ── カード ── */
+.card {
+  position: relative;
+  padding: 32px 20px 28px;
+  background: transparent;
+  border: none;
+  text-align: center;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardIn 0.6s ease forwards;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(91,63,166,0.0) 0%, rgba(15,184,160,0.0) 100%);
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: transparent;
+  transform: translateY(-4px);
+  z-index: 1;
+}
+
+.card:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(91,63,166,0.08) 0%, rgba(15,184,160,0.08) 100%);
+}
+
+@keyframes cardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-new-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--teal);
+  background: rgba(15,184,160,0.12);
+  border: 1px solid rgba(15,184,160,0.3);
+  padding: 3px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.12);
+}
+
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(91,63,166,0.6), rgba(15,184,160,0.6));
+  z-index: -1;
+}
+
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-initials {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  z-index: 1;
+}
+
+.card-company {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.card-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.card-role {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+
+/* ── 空状態 ── */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 100px 0;
+  color: rgba(255,255,255,0.25);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  line-height: 2.2;
+}
+
+/* ── 設定ボタン ── */
+.settings-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 200;
+  backdrop-filter: blur(8px);
+}
+
+.settings-btn:hover {
+  background: rgba(15,184,160,0.15);
+  border-color: rgba(15,184,160,0.5);
+  color: var(--teal);
+}
+
+/* ── モーダル ── */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+.overlay.open { display: flex; }
+
+.modal {
+  background: #13102a;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 36px;
+  width: min(540px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.modal-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  padding: 11px 14px;
+  border-radius: 6px;
+  outline: none;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--teal);
+}
+
+.form-input::placeholder {
+  color: rgba(255,255,255,0.25);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.btn-teal {
+  flex: 1;
+  background: var(--teal);
+  border: none;
+  color: #0e0a1f;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: opacity 0.2s;
+}
+
+.btn-teal:hover { opacity: 0.85; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--muted);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.35); }
+
+.howto {
+  margin-top: 24px;
+  background: rgba(0,0,0,0.25);
+  border: none;
+  border-radius: 8px;
+  padding: 18px 20px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 2;
+}
+
+.howto strong {
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.howto ol { padding-left: 16px; }
+.howto li { margin-bottom: 3px; }
+.howto code {
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--teal);
+}
+
+/* ── フッター ── */
+footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+}
+
+/* ── 区切り線 ── */
+.divider {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.divider-text {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cta-section {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 0 80px;
+}
+
+.cta-title {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 16px 48px;
+  border-radius: 40px;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.cta-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.7);
+}
+
+.and-more {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.18em;
+  color: var(--white);
+  opacity: 0.9;
+  padding: 0 0 64px;
+}
+
+
+.member-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 400;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.member-modal-overlay.open { display: flex; }
+
+.member-modal {
+  background: linear-gradient(160deg, #2a1f6e 0%, #1a4a9e 60%, #0a7a6e 100%);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 40px 32px 36px;
+  width: min(400px, 90vw);
+  text-align: center;
+  position: relative;
+}
+
+.member-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.member-modal-close:hover { color: rgba(255,255,255,0.9); }
+
+.member-modal-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #5b3fa6, #1a6fc4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  border: 2px solid rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.member-modal-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.member-modal-org {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.member-modal-role {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.member-modal-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.member-modal-name span {
+  font-size: 12px;
+  font-weight: 300;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+.member-modal-divider {
+  height: 0.5px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 0 18px;
+}
+
+.member-modal-message {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.9;
+  margin-bottom: 18px;
+  font-style: italic;
+}
+
+.member-modal-type {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  background: rgba(15,184,160,0.12);
+  border: 1px solid rgba(15,184,160,0.3);
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+
+.member-modal-fb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 8px 20px;
+  border-radius: 20px;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+
+.member-modal-fb:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.card { cursor: pointer; }
+
+@media (max-width: 640px) {
+  .site-header { padding: 16px 20px; }
+  .hero { padding: 60px 20px 48px; }
+  .grid-wrap { padding: 0 16px 80px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 2px; }
+  .modal { padding: 24px 20px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-noise"></div>
+
+<header class="site-header">
+  <div class="logo">ENJIN <span>CAMP</span></div>
+  <div class="header-badge">Invite Only · 2026</div>
+</header>
+
+<section class="hero">
+  <div class="hero-tag">Participants</div>
+  <h1>ENJIN CAMP <span class="year">2026</span></h1>
+  <div class="hero-subtitle">参加予定の皆様</div>
+</section>
+
+<div class="status-row">
+  <div class="dot" id="statusDot"></div>
+  <span id="statusText">接続中...</span>
+<span id="countNum" style="display:none"></span>
+</div>
+
+  <div class="divider-text">6/26 FRI — 6/27 SAT · 湘南国際村センター</div>
+  <div class="divider-line"></div>
+</div>
+
+<div class="grid-wrap">
+  <div class="grid" id="grid">
+    <div class="empty">読み込み中...</div>
+  </div>
+</div>
+
+<div class="and-more">and more !</div>
+
+<div class="cta-section">
+  <div class="cta-title">ENJIN CAMP 2026</div>
+  <a class="cta-btn" href="https://forms.gle/AERZoK9g9q3B47777" target="_blank">参加申込はこちら →</a>
+</div>
+
+<footer>ENJIN CAMP 2026 &nbsp;·&nbsp; Borderless Japan</footer>
+
+<button class="settings-btn" onclick="openSettings()" title="設定">⚙</button>
+
+<div class="overlay" id="overlay" onclick="bgClose(event)">
+  <div class="modal">
+    <div class="modal-title">データソース設定</div>
+    <p class="modal-desc">
+      GASのデプロイURLを入力してください。<br>
+      スプレッドシートを更新すると、このページへ自動反映されます。
+    </p>
+
+    <label class="form-label">GAS デプロイURL</label>
+    <input class="form-input" type="text" id="gasUrl"
+      placeholder="https://script.google.com/macros/s/.../exec" />
+
+    <label class="form-label">更新間隔（秒）</label>
+    <input class="form-input" type="number" id="intervalSec"
+      value="30" min="10" max="300" style="max-width:120px" />
+
+    <div class="modal-actions">
+      <button class="btn-teal" onclick="saveSettings()">保存して反映</button>
+      <button class="btn-ghost" onclick="closeSettings()">閉じる</button>
+    </div>
+
+    <div class="howto">
+      <strong>GASセットアップ手順</strong>
+      <ol>
+        <li>スプレッドシートを開いて「拡張機能 → Apps Script」</li>
+        <li><code>enjin_gas.js</code> の内容を貼り付け</li>
+        <li><code>SHEET_NAME</code> を実際のシート名に変更</li>
+        <li>「デプロイ → 新しいデプロイ → ウェブアプリ」</li>
+        <li>アクセス：<code>全員</code> でデプロイ</li>
+        <li>発行されたURLをここに貼り付けて保存</li>
+      </ol>
+    </div>
+
+    <div class="howto" style="margin-top:12px;">
+      <strong>スプレッドシートの列構成</strong>
+      <ol>
+        <li>A列：名前</li>
+        <li>B列：肩書き（任意）</li>
+        <li>C列：会社名・所属</li>
+        <li>D列：写真URL（GoogleドライブリンクでもOK）</li>
+        <li>E列：<code>no</code> で非表示にできます</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = 'enjin2026_config';
+let config = { gasUrl: 'https://script.google.com/macros/s/AKfycbxi3mu8kaHbS8ZwrihOV3aKX4EE-PkqRorMPxtGbEr9rBM3KG0ax1qG0YtKJ433OaMe/exec', intervalSec: 30 };
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  if (saved.gasUrl) config.gasUrl = saved.gasUrl;
+  if (saved.intervalSec) config.intervalSec = saved.intervalSec;
+} catch(e) {}
+
+let intervalId = null;
+let prevIds = null;
+
+function initials(name) {
+  const parts = name.trim().split(/[\s　]+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return name.slice(0, 2).toUpperCase();
+}
+
+function driveThumb(url) {
+  if (!url) return '';
+  const m1 = url.match(/\/d\/([\w-]+)/);
+  if (m1) return `https://drive.google.com/thumbnail?id=${m1[1]}&sz=w300`;
+  const m2 = url.match(/[?&]id=([\w-]+)/);
+  if (m2) return `https://drive.google.com/thumbnail?id=${m2[1]}&sz=w300`;
+  return url;
+}
+
+function setStatus(state, text) {
+  document.getElementById('statusDot').className = 'dot ' + state;
+  document.getElementById('statusText').textContent = text;
+}
+
+function renderGrid(data) {
+  const grid = document.getElementById('grid');
+  document.getElementById('countNum').textContent = data.total;
+
+  if (!data.participants || !data.participants.length) {
+    grid.innerHTML = '<div class="empty">スプレッドシートに参加者を追加すると<br>ここに表示されます</div>';
+    return;
+  }
+
+  // スプレッドシートの行順（上から）に並べる
+  const sorted = [...data.participants].sort((a, b) => (a.rowIndex ?? a.id) - (b.rowIndex ?? b.id));
+
+  const currentIds = new Set(sorted.map(p => String(p.id)));
+  const newIds = prevIds
+    ? new Set([...currentIds].filter(id => !prevIds.has(id)))
+    : new Set();
+
+  grid.innerHTML = sorted.map((p, i) => {
+    const photoUrl = driveThumb(p.photo);
+    const init = initials(p.name || '?');
+    const isNew = newIds.has(String(p.id));
+    const delay = Math.min(i * 45, 800);
+
+    return `
+      <div class="card" style="animation-delay:${delay}ms" onclick="openMemberModal(${JSON.stringify(p).replace(/`/g, '\\`')})">
+        ${isNew ? '<span class="card-new-badge">New</span>' : ''}
+        <div class="avatar">
+          <span class="avatar-initials">${init}</span>
+          ${photoUrl ? `<img src="${photoUrl}" alt="${p.name}" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : ''}
+        </div>
+        ${p.org ? `<div class="card-company">${p.org}</div>` : ''}
+        ${p.role ? `<div class="card-company">${p.role}</div>` : ''}
+        <div class="card-name">${p.name || '—'}<span style="font-size:11px; font-weight:300; margin-left:4px; opacity:0.7;">さん</span></div>
+      </div>`;
+  }).join('');
+
+  prevIds = currentIds;
+}
+
+async function fetchData() {
+  const url = config.gasUrl;
+  if (!url) {
+    setStatus('', '右下の ⚙ からデータソースを設定してください');
+    document.getElementById('grid').innerHTML =
+      '<div class="empty">⚙ ボタンからGASのURLを設定してください</div>';
+    document.getElementById('countNum').textContent = '—';
+    return;
+  }
+
+  setStatus('loading', '更新中...');
+  try {
+    const res = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    renderGrid(data);
+
+    const d = new Date(data.updatedAt);
+    const hm = d.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+    setStatus('live', `最終更新 ${hm}  ·  自動更新中`);
+  } catch(e) {
+    setStatus('error', 'データ取得に失敗しました。URLを確認してください');
+    console.error(e);
+  }
+}
+
+function startPolling() {
+  if (intervalId) clearInterval(intervalId);
+  fetchData();
+  const sec = Math.max(10, parseInt(config.intervalSec) || 30);
+  intervalId = setInterval(fetchData, sec * 1000);
+}
+
+function openSettings() {
+  document.getElementById('gasUrl').value = config.gasUrl || '';
+  document.getElementById('intervalSec').value = config.intervalSec || 30;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeSettings() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function bgClose(e) {
+  if (e.target === document.getElementById('overlay')) closeSettings();
+}
+
+function saveSettings() {
+  config.gasUrl = document.getElementById('gasUrl').value.trim();
+  config.intervalSec = parseInt(document.getElementById('intervalSec').value) || 30;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(config)); } catch(e) {}
+  closeSettings();
+  prevIds = null;
+  
+function openMemberModal(p) {
+  const init = initials(p.name || '?');
+  const photoUrl = p.photo || '';
+
+  // avatar
+  const avatarEl = document.getElementById('modalAvatar');
+  avatarEl.innerHTML = init + (photoUrl ? `<img src="${photoUrl}" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : '');
+
+  document.getElementById('modalOrg').textContent = p.org || '';
+  document.getElementById('modalOrg').style.display = p.org ? '' : 'none';
+
+  document.getElementById('modalRole').textContent = p.role || '';
+  document.getElementById('modalRole').style.display = p.role ? '' : 'none';
+
+  document.getElementById('modalName').innerHTML = (p.name || '—') + '<span>さん</span>';
+
+  const hasExtra = p.message || p.enjinType || p.facebook;
+  document.getElementById('modalDivider').style.display = hasExtra ? '' : 'none';
+
+  document.getElementById('modalMessage').textContent = p.message || '';
+  document.getElementById('modalMessage').style.display = p.message ? '' : 'none';
+
+  document.getElementById('modalType').textContent = p.enjinType ? 'ENJINタイプ：' + p.enjinType : '';
+  document.getElementById('modalType').style.display = p.enjinType ? '' : 'none';
+
+  const fbEl = document.getElementById('modalFb');
+  if (p.facebook) {
+    fbEl.href = p.facebook;
+    fbEl.style.display = '';
+  } else {
+    fbEl.style.display = 'none';
+  }
+
+  document.getElementById('memberOverlay').classList.add('open');
+}
+
+function closeMemberModal(e) {
+  if (e.target === document.getElementById('memberOverlay')) {
+    document.getElementById('memberOverlay').classList.remove('open');
+  }
+}
+
+startPolling();
+}
+
+
+function openMemberModal(p) {
+  const init = initials(p.name || '?');
+  const photoUrl = p.photo || '';
+
+  // avatar
+  const avatarEl = document.getElementById('modalAvatar');
+  avatarEl.innerHTML = init + (photoUrl ? `<img src="${photoUrl}" onload="this.previousElementSibling.style.display='none'" onerror="this.remove()">` : '');
+
+  document.getElementById('modalOrg').textContent = p.org || '';
+  document.getElementById('modalOrg').style.display = p.org ? '' : 'none';
+
+  document.getElementById('modalRole').textContent = p.role || '';
+  document.getElementById('modalRole').style.display = p.role ? '' : 'none';
+
+  document.getElementById('modalName').innerHTML = (p.name || '—') + '<span>さん</span>';
+
+  const hasExtra = p.message || p.enjinType || p.facebook;
+  document.getElementById('modalDivider').style.display = hasExtra ? '' : 'none';
+
+  document.getElementById('modalMessage').textContent = p.message || '';
+  document.getElementById('modalMessage').style.display = p.message ? '' : 'none';
+
+  document.getElementById('modalType').textContent = p.enjinType ? 'ENJINタイプ：' + p.enjinType : '';
+  document.getElementById('modalType').style.display = p.enjinType ? '' : 'none';
+
+  const fbEl = document.getElementById('modalFb');
+  if (p.facebook) {
+    fbEl.href = p.facebook;
+    fbEl.style.display = '';
+  } else {
+    fbEl.style.display = 'none';
+  }
+
+  document.getElementById('memberOverlay').classList.add('open');
+}
+
+function closeMemberModal(e) {
+  if (e.target === document.getElementById('memberOverlay')) {
+    document.getElementById('memberOverlay').classList.remove('open');
+  }
+}
+
+startPolling();
+</script>
+
+<div class="member-modal-overlay" id="memberOverlay" onclick="closeMemberModal(event)">
+  <div class="member-modal">
+    <button class="member-modal-close" onclick="document.getElementById('memberOverlay').classList.remove('open')">×</button>
+    <div class="member-modal-avatar" id="modalAvatar"></div>
+    <div class="member-modal-org" id="modalOrg"></div>
+    <div class="member-modal-role" id="modalRole"></div>
+    <div class="member-modal-name" id="modalName"></div>
+    <div class="member-modal-divider" id="modalDivider" style="display:none"></div>
+    <div class="member-modal-message" id="modalMessage"></div>
+    <div class="member-modal-type" id="modalType"></div>
+    <br>
+    <a class="member-modal-fb" id="modalFb" href="" target="_blank">Facebookを見る</a>
+  </div>
+</div>
+
+</body>
+</html>
