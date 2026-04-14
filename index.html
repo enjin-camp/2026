@@ -184,6 +184,34 @@ body{font-family:'Noto Sans JP',sans-serif;background:#c8d8f0;}
 .contact-logo{text-align:center;margin:0 auto;opacity:0.9;line-height:1;}
 
 /* FOOTER */
+
+.ct-row{display:grid;grid-template-columns:52px 16px 1fr;margin-bottom:0;}
+.ct-time{text-align:right;font-size:11px;font-weight:500;color:#aab;padding-top:14px;line-height:1.4;}
+.ct-line{display:flex;flex-direction:column;align-items:center;}
+.ct-dot{width:10px;height:10px;border-radius:50%;background:#d0d5f0;border:2px solid #c0c8e8;margin-top:14px;flex-shrink:0;}
+.ct-dot.ac{background:#0d1a6b;border-color:#0d1a6b;}
+.ct-dot.teal{background:#0fb8a0;border-color:#0fb8a0;}
+.ct-seg{flex:1;width:1.5px;background:#e8eaf6;}
+.ct-body{padding:10px 0 18px 16px;}
+.ct-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.08em;padding:2px 10px;border-radius:4px;margin-bottom:6px;}
+.b-op{background:#eef0fa;color:#3c4a9a;}
+.b-kn{background:#e0f7f3;color:#0a7a6a;}
+.b-th{background:#ede8ff;color:#5b40b0;}
+.b-en{background:#dde3ff;color:#2d3f99;}
+.b-pe{background:#e0f7f3;color:#0a7a6a;}
+.b-cl{background:#dde3ff;color:#2d3f99;}
+.ct-title2{font-size:13px;font-weight:500;color:#0d1a6b;line-height:1.6;margin-bottom:2px;}
+.ct-sub2{font-size:11px;color:#889;line-height:1.6;}
+.kn-card{background:#f0f2fc;border:1px solid #c8d0f0;border-radius:12px;padding:14px 16px;margin-top:4px;}
+.en-card{background:#f5f7ff;border:1px solid #dde2f5;border-radius:12px;padding:14px 16px;margin-top:4px;}
+.ct-speakers{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.ct-sp{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #dde3ff;border-radius:8px;padding:7px 10px;}
+.ct-sp-av{width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid #c8d0f0;}
+.ct-sp-av img{width:100%;height:100%;object-fit:cover;display:block;}
+.ct-sp-name{font-size:11px;font-weight:500;color:#0d1a6b;}
+.ct-sp-org{font-size:10px;color:#99a;line-height:1.4;}
+.ct-themes{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.ct-pill{font-size:10px;padding:3px 10px;border-radius:20px;background:#fff;border:1px solid #c8d0f0;color:#3a4a9a;}
 .lp-footer{position:relative;z-index:2;text-align:center;padding:24px;border-top:1px solid rgba(255,255,255,0.1);font-size:11px;color:rgba(255,255,255,0.4);}
 
 
@@ -297,10 +325,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:#c8d8f0;}
   </div>
   <div class="ct-inner">
     <div class="day-panel show" id="day1">
-      <div class="timeline" id="timeline-day1"><div style="padding:20px;color:#aab;font-size:13px;">読み込み中...</div></div>
+      <div class="timeline" id="timeline-day1">
+      <div class="ct-row"><div class="ct-time">12:00</div><div class="ct-line"><div class="ct-dot"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-op">Opening</span><div class="ct-title2">オープニング・チェックイン</div></div></div>
+      <div class="ct-row"><div class="ct-time">12:30</div><div class="ct-line"><div class="ct-dot ac"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-kn">Keynote</span><div class="kn-card"><div class="ct-title2">なぜ今、「社会を動かすグランドデザイン」が必要なのか？</div><div class="ct-sub2">── 個別最適の限界を超えるために</div><div class="ct-speakers"><div class="ct-sp"><div class="ct-sp-av"><img src="data:image/jpeg;base64,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" alt="深井龍之介"></div><div><div class="ct-sp-name">深井龍之介さん</div><div class="ct-sp-org">株式会社COTEN CEO</div></div></div><div class="ct-sp"><div class="ct-sp-av"><img src="data:image/jpeg;base64,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" alt="小沼大地"></div><div><div class="ct-sp-name">小沼大地さん</div><div class="ct-sp-org">NPO法人クロスフィールズ 代表理事</div></div></div><div class="ct-sp"><div class="ct-sp-av"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAA8ADwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6BUcU49DQopxHFBR5J+0b8QLzwV4dtbbSJEj1XUnZY5SAxgjUDc4B6nJAGeOSe1fJ9/ea5rly97eS3upS4+aV90hA+vavd/2vtHa48TeF7wHCXEUlq3PIIcN0+jGsb4cxQQGPTZYYYFmcRxBJCxyTxnKgHPsTWFat7NaK5tQw/tpWbscN8MvGOteDNbjv9OmfycgXNo5OydO6kdj6Hsa+4NBvrbVNKtdSs33211Cs0TeqsMj+dfNt94O0jxHZa5dw6fHaT6dDMY5UeQO8iDdypQKwOMcHIr3X4OadPpvwx8O2lySZlsUZxnOC2Wx+G7H4VdKqqiv1Iq0JUZW3R16ingGhF4p9aGRmrUm3j3ojHepAKCtjzf42+C38U6Ra3VsyLd6Y7TKGB/eJjJUY75UYrx1NReDXNGgeMYiZX6Y3EH17Y9/WvpvWtQs9NtJbi6kI8uMyeWg3OwAycKOT0r5t0+1k1DxIsvlYWeVigI455A9uMCuDGRSakengJt3ieq+GbYXut3tuELRXUOGLqykbsggE9R716dZ26W9tFBH92NAg/AVzvgm0EcsYMe+ZhsB64OP/AK1dVgg4IwavBwtFyMcfUcpqIAUtKBml2+9dhwFAYUZJAA6k1kf2hcXwkNm/lQq20ED5iOx9s1P4jkaPR5whwXXaSPTv/n3qnoAVbhy/CCzhYj+8xJ//AFVSVxsSLTZPM80nLd2bkmqMfgjSWvTeQeZbMTu2KoZA3qPT6V1CsXG3AABqxboAAvrzTnSjNWkioVJQd4uwug2cOnoBEzPKRgyOBkD2FaMm1m55XGOfWqdseCR36VaeOTYzxDdknK/4UKCirImUnJ3YjREQrMvKE4qOtO3CS2PkqcgoNv17fyrO2+tS0I5/UkF39ptRyVtt34seP/QawtYmktLGwuE4E/lROe4IyB+uPzrf0g+Zf6uzckSqg+gUY/nWVr0aPDFCw+RGZ1HuHyKtLQEzV0u6E0EcpP3hk1p25B89x/BEPzOawNLG3S0YdTWxop3aLNK3LO/zH9KoCxp2WeKPuzYrTuJWttNlnQfMoG36k4H86y7I7ZIGHUOMVtaki/Zp0AwDQ9hEdg4LRqmMbs9ewGBTb1dly4HQ8j8aq6Ux84D0U4rYaNJArOMnGKlrQOp//9k=" alt="田口一成"></div><div><div class="ct-sp-name">田口一成</div><div class="ct-sp-org">ボーダレス・ジャパン CEO</div></div></div></div></div></div></div>
+      <div class="ct-row"><div class="ct-time">13:20</div><div class="ct-line"><div class="ct-dot"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-th">Thema</span><div class="ct-title2">ENJIN Table オリエンテーション</div></div></div>
+      <div class="ct-row"><div class="ct-time">14:00</div><div class="ct-line"><div class="ct-dot ac"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-en">ENJIN Table</span><div class="en-card"><div class="ct-title2">社会を動かすための"共通の戦略（グランドデザイン）"を描く</div><div class="ct-themes"><span class="ct-pill">不登校の子ども</span><span class="ct-pill">サーキュラーな街づくり</span><span class="ct-pill">介護未満の高齢者</span><span class="ct-pill">就労困難な障がい者</span><span class="ct-pill">貧困家庭の子ども／ひとり親</span><span class="ct-pill">外国人労働者・移民</span><span class="ct-pill">お金の流れの再設計</span><span class="ct-pill">持続可能な地域自治の再設計</span><span class="ct-pill">生態系が崩れた森林の再設計</span></div></div></div></div>
+      <div class="ct-row"><div class="ct-time">18:00</div><div class="ct-line"><div class="ct-dot"></div><div class="ct-seg"></div></div><div class="ct-body"><div class="ct-title2">各イニシアチブの発表・全体共有</div></div></div>
+      <div class="ct-row"><div class="ct-time">19:30</div><div class="ct-line"><div class="ct-dot"></div><div class="ct-seg"></div></div><div class="ct-body"><div class="ct-title2">夕食・懇親会</div></div></div>
+      <div class="ct-row"><div class="ct-time" style="font-size:10px;padding-top:14px;">Mid<br>night</div><div class="ct-line"><div class="ct-dot"></div></div><div class="ct-body"><div class="ct-title2">Midnight ENJIN</div></div></div>
+    </div>
     </div>
     <div class="day-panel" id="day2">
-      <div class="timeline" id="timeline-day2"><div style="padding:20px;color:#aab;font-size:13px;">読み込み中...</div></div>
+      <div class="timeline" id="timeline-day2">
+      <div class="ct-row"><div class="ct-time" style="font-size:10px;padding-top:14px;">8:30<br>—<br>10:45</div><div class="ct-line"><div class="ct-dot teal"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-pe">PEACE ENJIN</span><div class="ct-title2">全体進行：アキラさん</div><div class="ct-sub2">講和 + 平和劇の観劇 / トークセッション / ワークショップ</div></div></div>
+      <div class="ct-row"><div class="ct-time">12:00</div><div class="ct-line"><div class="ct-dot ac"></div><div class="ct-seg"></div></div><div class="ct-body"><span class="ct-badge b-cl">closing</span><div class="ct-title2">PEACE ENJIN ワーク発表</div><div class="ct-sub2">ENJIN closing ／ 円陣写真</div></div></div>
+      <div class="ct-row"><div class="ct-time">12:45</div><div class="ct-line"><div class="ct-dot"></div></div><div class="ct-body"><div class="ct-title2">解散予定</div></div></div>
+    </div>
     </div>
   </div>
 </section>
@@ -411,9 +451,7 @@ function renderTimeline(items,cid){
   }).join('');
 }
 
-async function loadProgram(){
-  try{
-    const r=await fetch(GAS_URL+'?action=program&t='+Date.now(),{cache:'no-store'});
+);
     const d=await r.json();
     renderTimeline(d.day1,'timeline-day1');
     renderTimeline(d.day2,'timeline-day2');
@@ -481,7 +519,7 @@ function sw(id,btn){
   document.getElementById(id).classList.add('show');btn.classList.add('active');
 }
 
-loadProgram();loadMembers();
+loadMembers();
 </script>
 </body>
 </html>
