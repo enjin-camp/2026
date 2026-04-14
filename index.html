@@ -384,16 +384,17 @@ const DOT_STYLE   = {'Keynote':'accent','ENJIN Table':'accent','closing':'accent
 function renderTimeline(items,cid){
   const c=document.getElementById(cid);
   if(!items||!items.length){c.innerHTML='<div style="padding:20px;color:#aab;font-size:13px;">データがありません</div>';return;}
+  const BADGE_MAP={'Opening':'b-op','Keynote':'b-kn','Thema':'b-th','ENJIN Table':'b-en','PEACE ENJIN':'b-pe','closing':'b-cl'};
+  const DOT_MAP={'Keynote':'ac','ENJIN Table':'ac','closing':'ac','PEACE ENJIN':'teal'};
   c.innerHTML=items.map(item=>{
-    // 時刻がDate型で返ってきた場合に文字列変換
-    if(item.time && typeof item.time !== 'string') item.time = String(item.time);
+    let timeStr=item.time||'';
+    if(timeStr && typeof timeStr!=='string') timeStr=String(timeStr);
     const b=item.badge||'';
-    const dc=DOT_STYLE[b]?`tl-dot ${DOT_STYLE[b]}`:'tl-dot';
-    const cc=CARD_STYLE[b]?`tl-card ${CARD_STYLE[b]}`:'tl-card';
-    const bc=BADGE_COLOR[b]||'badge-opening';
-    const bh=b?`<span class="tl-badge ${bc}">${b}</span>`:'';
-    const sh=item.sub?`<div class="tl-sub">${item.sub}</div>`:'';
-    return `<div class="tl-item"><div class="${dc}"></div><div class="tl-time">${item.time}</div><div class="${cc}">${bh}<div class="tl-title">${item.title}</div>${sh}</div></div>`;
+    const dotCls='ct-dot'+(DOT_MAP[b]?' '+DOT_MAP[b]:'');
+    const badgeCls=BADGE_MAP[b]||'b-op';
+    const bh=b?`<span class="ct-badge ${badgeCls}">${b}</span>`:'';
+    const sh=item.sub?`<div class="ct-sub2">${item.sub}</div>`:'';
+    return `<div class="ct-row"><div class="ct-time">${timeStr}</div><div class="ct-line"><div class="${dotCls}"></div><div class="ct-seg"></div></div><div class="ct-body">${bh}<div class="ct-title">${item.title}</div>${sh}</div></div>`;
   }).join('');
 }
 
@@ -401,23 +402,10 @@ async function loadProgram(){
   try{
     const r=await fetch(GAS_URL+'?action=program&t='+Date.now(),{cache:'no-store'});
     const d=await r.json();
-    renderTimeline(d.day1,'timeline-day1');
-    renderTimeline(d.day2,'timeline-day2');
+    if(d.day1&&d.day1.length) renderTimeline(d.day1,'timeline-day1');
+    if(d.day2&&d.day2.length) renderTimeline(d.day2,'timeline-day2');
   }catch(e){
-    renderTimeline([
-      {time:'12:00',badge:'Opening',title:'オープニング・チェックイン',sub:''},
-      {time:'12:30',badge:'Keynote',title:'なぜ今、「社会を動かすグランドデザイン」が必要なのか？',sub:'── 個別最適の限界を超えるために'},
-      {time:'13:20',badge:'Thema',title:'ENJIN Table オリエンテーション',sub:''},
-      {time:'14:00',badge:'ENJIN Table',title:'社会を動かすための"共通の戦略（グランドデザイン）"を描く',sub:''},
-      {time:'18:00',badge:'',title:'各イニシアチブの発表・全体共有',sub:''},
-      {time:'19:30',badge:'',title:'夕食・懇親会',sub:''},
-      {time:'Midnight',badge:'',title:'Midnight ENJIN',sub:''},
-    ],'timeline-day1');
-    renderTimeline([
-      {time:'8:30 — 10:45',badge:'PEACE ENJIN',title:'全体進行：アキラさん',sub:'講和 + 平和劇の観劇 / トークセッション / ワークショップ'},
-      {time:'12:00',badge:'closing',title:'PEACE ENJIN ワーク発表',sub:'ENJIN closing ／ 円陣写真'},
-      {time:'12:45',badge:'',title:'解散予定',sub:''},
-    ],'timeline-day2');
+    console.log('プログラムデータ取得失敗（静的表示を使用）',e);
   }
 }
 
@@ -652,16 +640,17 @@ const DOT_STYLE   = {'Keynote':'accent','ENJIN Table':'accent','closing':'accent
 function renderTimeline(items,cid){
   const c=document.getElementById(cid);
   if(!items||!items.length){c.innerHTML='<div style="padding:20px;color:#aab;font-size:13px;">データがありません</div>';return;}
+  const BADGE_MAP={'Opening':'b-op','Keynote':'b-kn','Thema':'b-th','ENJIN Table':'b-en','PEACE ENJIN':'b-pe','closing':'b-cl'};
+  const DOT_MAP={'Keynote':'ac','ENJIN Table':'ac','closing':'ac','PEACE ENJIN':'teal'};
   c.innerHTML=items.map(item=>{
-    // 時刻がDate型で返ってきた場合に文字列変換
-    if(item.time && typeof item.time !== 'string') item.time = String(item.time);
+    let timeStr=item.time||'';
+    if(timeStr && typeof timeStr!=='string') timeStr=String(timeStr);
     const b=item.badge||'';
-    const dc=DOT_STYLE[b]?`tl-dot ${DOT_STYLE[b]}`:'tl-dot';
-    const cc=CARD_STYLE[b]?`tl-card ${CARD_STYLE[b]}`:'tl-card';
-    const bc=BADGE_COLOR[b]||'badge-opening';
-    const bh=b?`<span class="tl-badge ${bc}">${b}</span>`:'';
-    const sh=item.sub?`<div class="tl-sub">${item.sub}</div>`:'';
-    return `<div class="tl-item"><div class="${dc}"></div><div class="tl-time">${item.time}</div><div class="${cc}">${bh}<div class="tl-title">${item.title}</div>${sh}</div></div>`;
+    const dotCls='ct-dot'+(DOT_MAP[b]?' '+DOT_MAP[b]:'');
+    const badgeCls=BADGE_MAP[b]||'b-op';
+    const bh=b?`<span class="ct-badge ${badgeCls}">${b}</span>`:'';
+    const sh=item.sub?`<div class="ct-sub2">${item.sub}</div>`:'';
+    return `<div class="ct-row"><div class="ct-time">${timeStr}</div><div class="ct-line"><div class="${dotCls}"></div><div class="ct-seg"></div></div><div class="ct-body">${bh}<div class="ct-title">${item.title}</div>${sh}</div></div>`;
   }).join('');
 }
 
@@ -669,23 +658,10 @@ async function loadProgram(){
   try{
     const r=await fetch(GAS_URL+'?action=program&t='+Date.now(),{cache:'no-store'});
     const d=await r.json();
-    renderTimeline(d.day1,'timeline-day1');
-    renderTimeline(d.day2,'timeline-day2');
+    if(d.day1&&d.day1.length) renderTimeline(d.day1,'timeline-day1');
+    if(d.day2&&d.day2.length) renderTimeline(d.day2,'timeline-day2');
   }catch(e){
-    renderTimeline([
-      {time:'12:00',badge:'Opening',title:'オープニング・チェックイン',sub:''},
-      {time:'12:30',badge:'Keynote',title:'なぜ今、「社会を動かすグランドデザイン」が必要なのか？',sub:'── 個別最適の限界を超えるために'},
-      {time:'13:20',badge:'Thema',title:'ENJIN Table オリエンテーション',sub:''},
-      {time:'14:00',badge:'ENJIN Table',title:'社会を動かすための"共通の戦略（グランドデザイン）"を描く',sub:''},
-      {time:'18:00',badge:'',title:'各イニシアチブの発表・全体共有',sub:''},
-      {time:'19:30',badge:'',title:'夕食・懇親会',sub:''},
-      {time:'Midnight',badge:'',title:'Midnight ENJIN',sub:''},
-    ],'timeline-day1');
-    renderTimeline([
-      {time:'8:30 — 10:45',badge:'PEACE ENJIN',title:'全体進行：アキラさん',sub:'講和 + 平和劇の観劇 / トークセッション / ワークショップ'},
-      {time:'12:00',badge:'closing',title:'PEACE ENJIN ワーク発表',sub:'ENJIN closing ／ 円陣写真'},
-      {time:'12:45',badge:'',title:'解散予定',sub:''},
-    ],'timeline-day2');
+    console.log('プログラムデータ取得失敗（静的表示を使用）',e);
   }
 }
 
