@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENJIN CAMP 2026 — 8つのイニシアチブ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1a2448;
+  --purple: #6244c5;
+  --teal: #0aab94;
+  --blue: #2a6fd4;
+  --text: #1a2448;
+  --sub: #6b7a9e;
+  --border: #e4e8f4;
+  --bg: #f5f6fb;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ヘッダー */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { font-family: 'Nunito Sans', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 0.16em; text-decoration: none; color: var(--navy); }
+.logo span { color: var(--teal); }
+.header-nav { display: flex; align-items: center; gap: 28px; }
+.header-link { font-size: 12px; letter-spacing: 0.12em; color: var(--sub); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.header-link:hover { color: var(--navy); }
+.header-link.active { color: var(--teal); font-weight: 500; }
+.header-badge { font-size: 11px; letter-spacing: 0.18em; color: var(--sub); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px; text-transform: uppercase; }
+
+/* アクセントバー */
+.accent-bar { height: 4px; background: linear-gradient(90deg, #6244c5 0%, #2a6fd4 40%, #0aab94 100%); }
+
+/* ヒーロー */
+.hero {
+  text-align: center;
+  padding: 72px 40px 56px;
+}
+.hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.28em; color: var(--teal); text-transform: uppercase; margin-bottom: 24px; font-weight: 600; }
+.hero-tag::before, .hero-tag::after { content: ''; display: block; width: 28px; height: 1px; background: var(--teal); }
+.hero-title { font-family: 'Nunito Sans', sans-serif; font-size: clamp(40px, 6vw, 68px); font-weight: 800; letter-spacing: 0.06em; line-height: 1.1; color: var(--navy); margin-bottom: 16px; }
+.hero-title .num { color: var(--teal); }
+.hero-subtitle { font-size: clamp(15px, 2vw, 20px); font-weight: 400; color: var(--sub); letter-spacing: 0.08em; margin-bottom: 14px; }
+.hero-desc { max-width: 580px; margin: 0 auto 0; font-size: 14px; color: var(--sub); line-height: 2.1; letter-spacing: 0.04em; }
+
+/* フィルターバー */
+.filter-section {
+  max-width: 1100px; margin: 48px auto 0;
+  padding: 0 40px;
+  display: flex; align-items: center; gap: 10px;
+}
+.filter-label { font-size: 11px; letter-spacing: 0.16em; color: var(--sub); text-transform: uppercase; margin-right: 6px; white-space: nowrap; }
+.filter-btn {
+  font-family: 'Noto Sans JP', sans-serif; font-size: 12px; letter-spacing: 0.04em;
+  padding: 9px 22px; border-radius: 24px;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--sub);
+  cursor: pointer; transition: all 0.2s; font-weight: 400;
+}
+.filter-btn:hover { border-color: #b0b8d8; color: var(--navy); }
+.filter-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.filter-btn.axis-obj.active { background: var(--purple); border-color: var(--purple); color: var(--white); }
+.filter-btn.axis-str.active { background: var(--teal); border-color: var(--teal); color: var(--white); }
+
+/* 凡例 */
+.axis-legend {
+  max-width: 1100px; margin: 14px auto 32px;
+  padding: 0 40px;
+  display: flex; gap: 20px;
+}
+.axis-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--sub); }
+.axis-dot { width: 8px; height: 8px; border-radius: 50%; }
+.axis-dot.obj { background: var(--purple); }
+.axis-dot.str { background: var(--teal); }
+
+/* グリッド */
+.grid-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
+
+/* カード（P1） */
+.init-card {
+  background: var(--white);
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+  opacity: 0; transform: translateY(20px);
+  animation: cardIn 0.5s ease forwards;
+  overflow: hidden;
+}
+.init-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(26,36,72,0.13);
+  border-color: #b8c2e0;
+}
+.init-card.hidden { display: none; }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+/* 対象軸：左ボーダーアクセント（太め） */
+.init-card[data-axis="obj"] { border-left: 5px solid var(--purple); }
+.init-card[data-axis="str"] { border-left: 5px solid var(--teal); }
+
+.card-inner { padding: 30px 28px 26px; }
+
+/* 軸タグ：塗りつぶし＋白文字 */
+.card-axis-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 18px;
+  padding: 6px 14px; border-radius: 20px; color: #fff;
+}
+[data-axis="obj"] .card-axis-tag { background: var(--purple); }
+[data-axis="str"] .card-axis-tag { background: var(--teal); }
+
+.card-title { font-size: 23px; font-weight: 700; line-height: 1.45; margin-bottom: 14px; color: var(--navy); letter-spacing: 0.02em; }
+.card-tagline { font-size: 14px; color: var(--sub); line-height: 1.95; letter-spacing: 0.03em; }
+
+.card-cta {
+  margin-top: 26px; padding-top: 18px;
+  border-top: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.card-cta-text {
+  font-size: 12px; letter-spacing: 0.1em; font-weight: 600; color: var(--sub);
+  display: flex; align-items: center; gap: 7px; transition: color 0.2s;
+}
+.init-card:hover .card-cta-text { color: var(--navy); }
+.cta-arrow { transition: transform 0.2s; font-size: 15px; }
+.init-card:hover .cta-arrow { transform: translateX(5px); }
+
+/* ============================
+   モーダル（P2）
+   ============================ */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,15,40,0.55);
+  z-index: 500; align-items: flex-start; justify-content: center;
+  backdrop-filter: blur(6px);
+  padding: 40px 20px; overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--white);
+  border-radius: 22px;
+  width: min(780px, 100%);
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(10,15,40,0.2);
+  animation: modalIn 0.3s ease;
+  border: 1px solid var(--border);
+}
+@keyframes modalIn { from { opacity:0; transform: translateY(20px) scale(0.98); } to { opacity:1; transform: translateY(0) scale(1); } }
+
+/* モーダル上部アクセントライン */
+.modal-accent-bar { height: 5px; }
+.modal-accent-bar.obj { background: linear-gradient(90deg, var(--purple), var(--blue)); }
+.modal-accent-bar.str { background: linear-gradient(90deg, var(--blue), var(--teal)); }
+
+.modal-close {
+  position: absolute; top: 20px; right: 22px;
+  background: var(--bg); border: 2px solid var(--border);
+  color: var(--sub); font-size: 16px;
+  width: 38px; height: 38px; border-radius: 50%;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; z-index: 10;
+  font-weight: 700;
+}
+.modal-close:hover { background: var(--border); color: var(--navy); }
+
+/* モーダルヘッダー */
+.modal-header { padding: 44px 48px 36px; border-bottom: 2px solid var(--border); }
+/* 軸タグ：塗りつぶし＋白文字 */
+.modal-axis-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 18px;
+  padding: 6px 16px; border-radius: 20px; color: #fff;
+}
+.modal-axis-tag.obj { background: var(--purple); }
+.modal-axis-tag.str { background: var(--teal); }
+
+.modal-title { font-size: clamp(26px, 3.5vw, 34px); font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 16px; }
+.modal-headline { font-size: 19px; font-weight: 600; color: var(--navy); line-height: 1.75; margin-bottom: 20px; }
+.modal-desc { font-size: 14px; color: var(--sub); line-height: 2.15; letter-spacing: 0.03em; }
+
+/* AS IS / TO BE */
+.modal-transform { padding: 36px 48px; border-bottom: 2px solid var(--border); }
+.section-label { font-size: 11px; letter-spacing: 0.22em; color: #8892b4; text-transform: uppercase; margin-bottom: 18px; font-weight: 700; }
+.transform-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: start; }
+.transform-col { padding: 20px 22px; border-radius: 12px; }
+.transform-col.asis { background: #f7f8fc; border: 1.5px solid var(--border); }
+.transform-col.tobe { background: rgba(10,171,148,0.06); border: 1.5px solid rgba(10,171,148,0.25); }
+.transform-badge {
+  font-family: 'Nunito Sans', sans-serif; font-size: 9px; font-weight: 800;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  display: inline-block; padding: 3px 10px; border-radius: 4px; margin-bottom: 12px;
+}
+.asis .transform-badge { background: var(--border); color: var(--sub); }
+.tobe .transform-badge { background: rgba(10,171,148,0.15); color: var(--teal); }
+.transform-list { list-style: none; }
+.transform-list li { font-size: 12px; color: var(--sub); line-height: 2.1; padding-left: 12px; position: relative; }
+.transform-list li::before { content: '·'; position: absolute; left: 0; color: #c0c8e0; }
+.tobe .transform-list li { color: #2a5a50; }
+.transform-arrow-col { display: flex; align-items: center; justify-content: center; padding-top: 38px; color: #c0c8e0; font-size: 18px; }
+
+/* タイムライン */
+.modal-timeline { padding: 28px 48px 0; }
+.timeline-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden;
+  margin-bottom: 0;
+}
+.timeline-item {
+  padding: 18px 16px;
+  border-right: 1px solid var(--border);
+}
+.timeline-item:last-child { border-right: none; }
+.timeline-phase {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--teal); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 5px;
+}
+.timeline-phase-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.timeline-phase-text { font-size: 11px; color: var(--sub); line-height: 1.7; }
+
+/* 参加者セクション */
+.modal-participants { padding: 36px 48px 48px; }
+.participants-note { font-size: 11px; color: #9aa3c0; letter-spacing: 0.04em; margin-bottom: 20px; }
+.participants-table { width: 100%; border-collapse: collapse; }
+.participants-table th {
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--navy); font-weight: 700; text-align: left;
+  padding: 12px 16px;
+  background: #eef0f8;
+  border-bottom: 2px solid var(--border);
+}
+.participants-table th:first-child { border-radius: 8px 0 0 0; }
+.participants-table th:last-child { border-radius: 0 8px 0 0; }
+.participants-table td {
+  font-size: 13px; color: var(--sub); line-height: 1.8;
+  padding: 16px 16px; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.participants-table tr:last-child td { border-bottom: none; }
+.participants-table tr:hover td { background: #fafbfe; }
+.category-label { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.category-sub { font-size: 11px; color: #9aa3c0; line-height: 1.7; }
+.byname-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.byname-tag {
+  font-size: 11px; color: var(--teal);
+  background: rgba(10,171,148,0.08); border: 1px solid rgba(10,171,148,0.22);
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .site-header { padding: 0 20px; }
+  .header-nav { display: none; }
+  .hero { padding: 48px 20px 36px; }
+  .filter-section, .axis-legend, .grid-wrap { padding: 0 20px; }
+  .grid { grid-template-columns: 1fr; }
+  .modal-header, .modal-transform, .modal-participants, .modal-timeline { padding: 24px 22px; }
+  .transform-row { grid-template-columns: 1fr; }
+  .transform-arrow-col { display: none; }
+  .timeline-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- アクセントバー -->
+<div class="accent-bar"></div>
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <a class="logo" href="#">ENJIN<span>.</span>CAMP</a>
+  <nav class="header-nav">
+    <a class="header-link" href="#">概要</a>
+    <a class="header-link active" href="#">イニシアチブ</a>
+    <a class="header-link" href="#">参加者</a>
+    <a class="header-link" href="#">タイムライン</a>
+  </nav>
+  <span class="header-badge">2026</span>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-tag">Initiatives</div>
+  <h1 class="hero-title">8つのイニシアチブ</h1>
+  <p class="hero-subtitle">社会を前に進めるための設計図を描く</p>
+  <p class="hero-desc">
+    バラバラに存在している社会へのアプローチを繋げ直して<br>
+    社会を動かすための"共通の戦略（グランドデザイン）と役割"を描き、<br>
+    アクションを生み出すことを目指します
+  </p>
+</section>
+
+<!-- フィルター -->
+<div class="filter-section">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" data-filter="all">すべて</button>
+  <button class="filter-btn axis-obj" data-filter="obj">対象軸</button>
+  <button class="filter-btn axis-str" data-filter="str">構造軸</button>
+</div>
+<div class="axis-legend">
+  <span class="axis-badge"><span class="axis-dot obj"></span>対象軸 — 人にフォーカスするアプローチ</span>
+  <span class="axis-badge"><span class="axis-dot str"></span>構造軸 — 社会の仕組みにフォーカスするアプローチ</span>
+</div>
+
+<!-- グリッド（P1） -->
+<div class="grid-wrap">
+  <div class="grid" id="grid">
+
+    <div class="init-card" data-axis="obj" data-id="futoko" style="animation-delay:0.05s">
+      <div class="card-inner">
+        <div class="card-axis-tag">対象軸</div>
+        <div class="card-title">不登校の子ども</div>
+        <div class="card-tagline">学びと居場所が途切れない社会を<br>どうつくるか？</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="obj" data-id="hinkon" style="animation-delay:0.1s">
+      <div class="card-inner">
+        <div class="card-axis-tag">対象軸</div>
+        <div class="card-title">貧困家庭のこども・ひとり親</div>
+        <div class="card-tagline">分断された支援を繋ぎ直し、<br>家族全体を支える仕組みをつくる</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="obj" data-id="kaigo" style="animation-delay:0.15s">
+      <div class="card-inner">
+        <div class="card-axis-tag">対象軸</div>
+        <div class="card-title">介護未満の高齢者</div>
+        <div class="card-tagline">分断された課題をつなぎ直し、<br>人生後半の役割を再設計する。</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="obj" data-id="shogai" style="animation-delay:0.2s">
+      <div class="card-inner">
+        <div class="card-axis-tag">対象軸</div>
+        <div class="card-title">就労困難な障がい者</div>
+        <div class="card-tagline">働く機会の設計を変え、<br>排除されない社会をつくるには</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="obj" data-id="gaikoku" style="animation-delay:0.25s">
+      <div class="card-inner">
+        <div class="card-axis-tag">対象軸</div>
+        <div class="card-title">日本に住む<br>外国人労働者・移民</div>
+        <div class="card-tagline">雇用・教育・地域の分断を越え、<br>多文化共生の仕組みを再設計する</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="str" data-id="shinrin" style="animation-delay:0.3s">
+      <div class="card-inner">
+        <div class="card-axis-tag">構造軸</div>
+        <div class="card-title">生態系が崩れた<br>森林・流域の再設計</div>
+        <div class="card-tagline">分断された資源と担い手をつなぎ直し、<br>持続可能な森林循環をつくる</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="str" data-id="jichi" style="animation-delay:0.35s">
+      <div class="card-inner">
+        <div class="card-axis-tag">構造軸</div>
+        <div class="card-title">持続可能な<br>地域自治の再設計</div>
+        <div class="card-tagline">暮らしの基盤を、再び自分たちで持てる社会を<br>どうつくるか？</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+    <div class="init-card" data-axis="str" data-id="circular" style="animation-delay:0.4s">
+      <div class="card-inner">
+        <div class="card-axis-tag">構造軸</div>
+        <div class="card-title">サーキュラーな<br>街づくり</div>
+        <div class="card-tagline">廃棄前提の経済構造を変え、<br>資源が巡る街をつくる</div>
+        <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- モーダル（P2） -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal" style="position:relative">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  futoko: {
+    axis:"obj", axisLabel:"対象軸",
+    title:"不登校の子ども",
+    headline:"学びから取り残される子どもをなくし、<br>誰もが未来を描ける社会へ",
+    desc:`不登校の子どもは年々増加し、学校に行けないことが特別ではない時代になっている。一方で、社会の仕組みは依然として「学校に通うこと」を前提に設計されており、子どもも保護者も孤立しやすい状況が続いている。<br><br>フリースクール、地域の居場所、オンライン教育など、新しい学びの選択肢は生まれているものの、制度や地域との接続はまだ十分ではない。学校に戻すことだけをゴールにしない。分断された学びの選択肢をつなぎ直し、子どもが自分らしく育てる新しい学びの社会モデルを構想する。`,
+    asis:["学校復帰前提","親の孤立","地域資源不足","卒業後不安","学びの選択肢格差"],
+    tobe:["多様な学びが認められる","子どもの社会接点がある","親も支援される","卒業後の進路がある","地域全体で支える"],
+    participants:[
+      {category:"居場所・学びをつくる人",sub:"フリースクール・オルタナティブスクール運営者・子どもの居場所づくりのNPO・学習支援の実践者",question:"学校以外の学びの場をどうつくり、どう続けるか",byname:["夢中教室","TeacherTeacher"]},
+      {category:"家族・保護者を支える人",sub:"ひとり親・不登校家庭のコミュニティ支援者・親向けカウンセラー・家族支援NPO",question:"親が孤立しない仕組みをどうつくるか",byname:["Gifted Creativ","パーソルキャリア","カタリバ"]},
+      {category:"学校・制度を変える人",sub:"文科省・教育委員会の担当者・学校改革の実践者・出席認定制度の改革者・こども家庭庁",question:"制度の中に多様な学びをどう位置づけるか",byname:["文部科学省","こども家庭庁","デロイトトーマツ","自治体教育長"]},
+      {category:"受け皿になる人",sub:"多様なキャリアを認める企業のHR担当・職業体験・インターンを提供する企業・社会起業家",question:"企業が受け皿になれば子どもの将来不安は減るか",byname:["ベネッセ"]},
+      {category:"テクノロジーで学びを広げる人",sub:"EdTechスタートアップ・AI個別最適化学習の実践者・メタバース教育・オンライン学習プラットフォーム",question:"テクノロジーで学びの選択肢をどこまで広げられるか",byname:["ライフイズテック"]},
+      {category:"文化・認知を変える人",sub:"不登校経験者の当事者発信者・教育系メディア・「学校以外の生き方」を発信する人・研究者",question:'"不登校でもOK"という文化をどうつくるか',byname:["不登校ジャーナリスト"]},
+    ]
+  },
+  hinkon: {
+    axis:"obj", axisLabel:"対象軸",
+    title:"貧困家庭のこども・ひとり親",
+    headline:"貧困の連鎖を断ち切る、<br>包括支援モデルをつくる",
+    desc:`日本では、7人に1人の子どもが相対的貧困状態にあると言われる中、経済的困難だけでなく、教育格差、体験格差、情報格差、孤立など、複数の課題が家庭の中で複雑に重なっている。<br><br>一方で、支援は学習、食事、就労、福祉など領域ごとに分断され、困難が深刻化してから初めて支援につながるケースも少なくない。子どもだけでも、親だけでもなく、家族全体を支えながら未来の選択肢を広げる社会へ。分断された支援をつなぎ直し、貧困の連鎖を防ぐ新しい仕組みを構想する。`,
+    asis:["支援につながる時には深刻化している","子どもの教育・体験格差","親の就労不安定","支援情報が届かない","支援が縦割り"],
+    tobe:["早期支援につながる","子どもの機会が保障される","親が安定して働ける","家庭全体を支えられる","貧困の連鎖が断ち切られる"],
+    participants:[
+      {category:"食・居場所で直接支える側",sub:"子ども食堂・フードパントリー運営者・フードバンク・学習支援NPO・地域の見守り実践者",question:"食と居場所を起点にどこまで支援を広げられるか",byname:["NPO法人CLACK"]},
+      {category:"ひとり親の就労を支える側",sub:"ひとり親向けキャリア支援NPO・人材派遣・ファミリーサポートの実践者・保育事業者",question:"親が安定すれば子どもが安定する。親支援をどう設計するか",byname:["パーソルキャリア","フローレンス","LivEQuality","ネッスー"]},
+      {category:"学習・進路をひらく側",sub:"給付型奨学金の運営者・無料塾・オルタナティブ教育・進路多様化を支援する実践者",question:"お金がなくても進路の選択肢を持てる仕組みとは",byname:["チャンス・フォー・チルドレン","Learning for All","かものはしプロジェクト","カタリバ"]},
+      {category:"企業・流通が支援に関わる側",sub:"食品・流通（フードロス活用）・企業の社会貢献担当・フェアトレード×子ども支援",question:"企業のリソースを子ども支援にどうつなぐか",byname:["西濃運輸"]},
+      {category:"お金の仕組みを変える側",sub:"インパクト投資家・社会的金融・クラウドファンディング型支援プラットフォーム",question:"子どもの貧困にどうお金を流すか",byname:["PwC財団"]},
+      {category:"文化・制度を変える側",sub:"こども家庭庁・厚労省・教育委員会・子どもの権利を発信するメディア・当事者",question:"自己責任論を覆し、社会全体の問題として共有するには",byname:["厚生労働省","こども家庭庁"]},
+    ]
+  },
+  kaigo: {
+    axis:"obj", axisLabel:"対象軸",
+    title:"介護未満の高齢者",
+    headline:"支える高齢者政策から、<br>活躍できる新しい長寿社会モデルへ",
+    desc:`人生100年時代。長く生きられるようになった一方で、長く"必要とされ続ける仕組み"はまだない。高齢者を「支えられる存在」として捉える社会から、人生後半も役割を持ち続けられる社会へ。<br><br>介護予防、地域の担い手不足、都市部のミドル人材と地域の接続など、バラバラに語られているこれらの課題をつなぎ直し、新しい役割設計に向けたグランドデザインを描く。`,
+    asis:["介護が必要になってから支援が始まる","元気な高齢者の役割が少ない","地域は担い手不足","都市には経験あるミドル人材が偏在"],
+    tobe:["要介護前から地域との接点がある","高齢者が小さな役割を持ち続けられる","地域に担い手が循環する","都市の経験資本が地域に還流する"],
+    participants:[
+      {category:"日常の接点でつながる人",sub:"コミュニティナース・民生委員・地域の商店・配食事業者・訪問型サービスの実践者",question:"日常の中でどう孤立や異変を早期発見するか",byname:["CNC","兵庫ヤクルト販売","エイジウェル"]},
+      {category:"居場所をつくる人",sub:"居場所・サロン運営者・コミュニティデザイナー・多世代交流の実践者・社会的処方の実践者",question:"役割を持てる居場所をどう設計するか",byname:["ぐるんとびー","えんがお","Relight"]},
+      {category:"健康を支える人",sub:"フレイル予防の実践者・リハビリ/機能訓練事業者・予防医療・ヘルスケア事業者",question:"身体的・精神的・社会的健康をどう維持できるか",byname:["厚生労働省"]},
+      {category:"人材を地域に循環させる人",sub:"関係人口創出の実践者・越境学習・大企業人事・二拠点居住支援・地域マッチング事業者",question:"都市の経験人材を、どう地域の担い手に変えられるか",byname:["クラブツーリズム","クロスフィールズ"]},
+      {category:"制度・仕組みを変える人",sub:"中央省庁・自治体・保険・金融・研究者",question:"予防にお金が流れる仕組みをどう作るか",byname:["経産省"]},
+    ]
+  },
+  shogai: {
+    axis:"obj", axisLabel:"対象軸",
+    title:"就労困難な障がい者",
+    headline:"能力ではなく仕事の設計を問い直し、<br>誰もが役割を持てる仕事社会へ",
+    desc:`障害の有無、病気、育児・介護、精神的な困難。働く意欲や能力があっても、現在の働き方や仕事の設計によって、社会参加の機会から排除されている人がいる。<br><br>一方で、多くの企業では「この人に何ができるか」という供給起点で仕事を考えがちで、持続的な需要創出や新しい仕事設計まで踏み込めていない。"働けない人"がいるのではなく、今の仕事の設計そのものに課題があるのではないか。分断された仕事と人材をつなぎ直し、誰もが役割を持てる新しい就労モデルを構想する。`,
+    asis:["手帳前提の制度設計","障害者雇用の数合わせ化","「雇うこと」が目的化","需要側の設計不足","働きづらい人の対象が限定的に捉えられる"],
+    tobe:["仕事起点で設計される","多様な人が役割を持てる","持続的な需要がある","社会参加機会が増える","「働けない」という固定観念がなくなる"],
+    participants:[
+      {category:"就労の場をつくる側",sub:"就労継続支援事業所の改革者・就労移行支援の実践者",question:"採算が合い、当事者が輝ける就労モデルとは",byname:["UNROOF","コトブキ印刷","みんなのベース","ローランズ","フローレンス"]},
+      {category:"企業の雇用を変える側",sub:"法定雇用率対応の大企業HR・特例子会社",question:"義務から共創へ。企業の障がい者雇用をどう変えるか",byname:["ゼネラルパートナーズ","マリモホールディングス"]},
+      {category:"新しい価値を生み出す側",sub:"障がいアート×ビジネスの実践者・ソーシャルビジネス事業者",question:"障がいを「多様性」として市場価値に変えられるか",byname:["ヘラルボニー","すみなす"]},
+      {category:"当事者の声を届ける側",sub:"当事者・家族の発信者・障がい者権利活動家",question:"当事者が設計の主体になるためには何が必要か",byname:[]},
+      {category:"テクノロジーで就労を広げる側",sub:"テレワーク×障がい者雇用のスタートアップ・支援テクノロジーの実践者",question:"テクノロジーで就労の場をどこまで広げられるか",byname:["オリイ研究所","テクノツール"]},
+      {category:"制度・法律を変える側",sub:"厚労省（障害者雇用促進担当）・自治体・研究者",question:"法定雇用率・報酬体系をどう変えれば現場が動くか",byname:[]},
+    ]
+  },
+  gaikoku: {
+    axis:"obj", axisLabel:"対象軸",
+    title:"日本に住む外国人労働者・移民",
+    headline:"「労働力」としてではなく、<br>生活者として根を張れる社会へ",
+    desc:`深刻な人手不足を背景に、外国人労働者の受け入れが急速に進む一方、住居、教育、医療、日本語学習、地域とのつながりなど、「生活者」として根を張るための仕組みは、まだ十分に整っていない。<br><br>労働力として迎え入れるだけではなく、日本で暮らす一人ひとりが安心して働き、学び、家族を築ける社会へ。雇用、教育、行政、地域コミュニティなど分断された課題をつなぎ直し、多文化共生社会の新しいグランドデザインを描く。`,
+    timeline:[
+      {phase:"来日前のフェイズ",text:"送り出し国での期待値と現実のギャップをどう埋めるか。情報の非対称性が、来日後の失望・孤立・搾取の温床になっている。"},
+      {phase:"入国直後のフェイズ",text:"住居・手続き・言語・生活情報へのアクセスを、誰がどう保障するか。「来た初日から困らない」状態を設計できるか。"},
+      {phase:"定着期（半年〜2年）",text:"仕事の定着だけでなく、子どもの教育・家族の生活・地域とのつながりをどう支えるか。ここが整わないと長期定着は起きない。"},
+      {phase:"社会参画期（3年以降）",text:"「支えられる側」から「地域の担い手」への転換をどう設計するか。外国人住民が地域に根を張るとき、日本人側・地域側は何を変える必要があるか。"},
+    ],
+    asis:["人手不足産業の穴埋めとして受け入れ","日本語教育不足","住居/医療/子育て/教育が分断","技能実習制度依存","地域との接点不足"],
+    tobe:["長期的に暮らせる","家族形成できる","地域コミュニティに所属できる","キャリアアップ可能","多文化共生が当たり前"],
+    participants:[
+      {category:"来日直後を支える",sub:"生活相談・住居・日本語・行政手続きの実践者",question:"来た初日から困らない状態をどうつくるか",byname:["Welcome Japan","GTN（グローバルトラストネットワークス）","むすびば"]},
+      {category:"仕事をつくる",sub:"中小・農業・介護など現場雇用者、就労支援実践者",question:"安心して働ける職場をどう設計するか",byname:["ZERO PC","NINAITE","モンスターラボ"]},
+      {category:"家族と子どもを支える",sub:"子どもの教育・保育・医療アクセスの実践者",question:"家族ごと根を張れる環境をどうつくるか",byname:["一般社団法人 YOU MAKE IT","カタリバ Rootsプロジェクト"]},
+      {category:"関係性・文化をつくる",sub:"多文化共住・地域共生の設計者",question:"隣人として出会える場をどうつくるか",byname:["ボーダレスハウス"]},
+      {category:"制度を変える",sub:"入管・法務省・研究者・行政書士",question:"在留制度をどう人間的なものに変えるか",byname:["内閣府","PoliPoli"]},
+    ]
+  },
+  shinrin: {
+    axis:"str", axisLabel:"構造軸",
+    title:"生態系が崩れた森林・流域の再設計",
+    headline:"森林・水・地域経済をつなぐ、<br>流域モデルをつくる",
+    desc:`日本の森林の約4割を占める人工林では、木材価格の低迷や担い手不足により、手入れされない森林が増えている。その影響は林業だけに留まらず、土砂災害、水源機能の低下、生物多様性の損失など、地域全体の持続可能性にも大きく影響している。<br><br>一方で、森林、流域、エネルギー、観光、金融などのプレイヤーは分断され、森の価値を社会全体で支える仕組みはまだ十分に整っていない。森林を"守る対象"ではなく、地域の未来を支える資産へ。分断された資源と担い手をつなぎ直し、持続可能な森林循環モデルを構想する。`,
+    asis:["放置林の増加","林業の低収益性","担い手不足","災害リスク増加","自然資本への投資不足"],
+    tobe:["森林管理が持続可能","多様な収益源がある","若い担い手が増える","流域全体が潤う","自然資本に投資が集まる"],
+    participants:[
+      {category:"森を再生・管理する側",sub:"林業ベンチャー・森林再生NPO・山林所有者支援の実践者・林業DXのスタートアップ",question:"採算が合う林業モデルをどうつくるか",byname:["野村不動産HD"]},
+      {category:"川下の需要をつくる側",sub:"木材・建材メーカー・建築家・不動産・製紙・国産材を調達する小売・メーカー",question:"川下の調達基準を変えれば林業全体が動くのでは",byname:["ヤマハ発動機","無印良品"]},
+      {category:"生態系の価値をお金にする側",sub:"カーボンクレジット・生態系サービス評価の専門家・インパクト投資家・森林ファンド",question:"自然資本をどう価値化し、投資を呼び込むか",byname:["エーゼロ"]},
+      {category:"流域をつなぐ側",sub:"生態学・流域管理の研究者・野生動物の専門家・森と海のつながりを研究する科学者",question:"流域全体を一つのシステムとして誰が管理するか",byname:["Wildlife Ventures"]},
+      {category:"関係人口・文化をつくる側",sub:"森の関係人口づくりの実践者・自然体験教育・リジェネラティブ文化を発信する実践者",question:"都市と森をつなぐ接点をどう設計するか",byname:["greenz.jp","やまとわ"]},
+      {category:"制度・縦割りを変える側",sub:"環境省・林野庁・国交省の担当者・森林環境譲与税を活用する自治体担当・流域管理推進者",question:"縦割りを超えた流域管理体制をどう制度化するか",byname:["環境省","林野庁"]},
+    ]
+  },
+  jichi: {
+    axis:"str", axisLabel:"構造軸",
+    title:"持続可能な地域自治の再設計",
+    headline:"暮らしを委ねる社会から、<br>共につくる社会へ",
+    desc:`人口減少や高齢化だけでなく、災害、エネルギー、食、福祉など、私たちの暮らしを支える基盤そのものが揺らいでいる。これまで多くの地域では、行政や大企業、外部資本に暮らしを委ねることで成り立ってきた。<br><br>しかし、その仕組みが限界を迎える中、各地では食、エネルギー、住まい、仕事、ケアを地域の中で再編集し直す動きが生まれている。生きることそのものに、再び当事者として関わる社会へ。分断された暮らしの基盤をつなぎ直し、"生き延びるための自治"のグランドデザインを描く。`,
+    asis:["外部資本依存","行政依存","地域内経済流出","エネルギー/食料外部依存","住民の意思決定機会不足"],
+    tobe:["地域で暮らしを支える","自治的な意思決定","地域内循環","多様な担い手参加","危機に強い地域"],
+    participants:[
+      {category:"地域を自律運営する側",sub:"集落・自治会の再設計をしている実践者・住民自治の先進地事例・地域運営組織（LLCや一般社団）の運営者",question:"行政なしで地域が回る仕組みはつくれるか",byname:["paramita","うむさんラボ","むすびえ"]},
+      {category:"移住・関係人口をつくる側",sub:"移住コーディネーター・地域おこし協力隊OB・二拠点居住・ワーケーション事業者・Uターン起業家",question:"外から来た人が地域の担い手になるまでの設計とは",byname:["長野県地域おこし協力隊"]},
+      {category:"地域経済を回す側",sub:"ローカルベンチャー・地域商社・農業法人・6次産業化・地域ブランドづくりの実践者",question:"地域の資源でどう経済を自給するか",byname:["NoMAラボ","OWB","haccoba","umari"]},
+      {category:"都市と地域をつなぐ側",sub:"越境設計者・都市×農村の交流プログラム・ふるさと納税の戦略設計者",question:"都市の人・お金・才能を地域に流す接点をどう設計するか",byname:["シェアビレッジ"]},
+      {category:"制度・財源を変える側",sub:"総務省・地方創生担当・ふるさと納税制度の改革者・地方分権の推進者・地域ファンドの設計者",question:"地域が自律するために必要な財源・権限をどう移譲するか",byname:["環境省","京都府向日市"]},
+      {category:"横断的な支援をする人",sub:"NPO・コンサルタント・プロボノ支援の実践者",question:"多様なプレイヤーをどうつなぎ、動かすか",byname:["RELEASE;","デロイト トーマツ"]},
+    ]
+  },
+  circular: {
+    axis:"str", axisLabel:"構造軸",
+    title:"サーキュラーな街づくり",
+    headline:"捨てる前提の街から、<br>循環を前提とした街へ",
+    desc:`大量生産・大量消費を前提に発展してきた都市では、まだ多くの資源が「使い終わったら捨てる」前提で設計されている。その結果、廃棄コストの増大、資源不足、環境負荷の拡大など、都市の持続可能性そのものが問われている。<br><br>一方で、行政、企業、市民、地域事業者などの取り組みは分断され、街全体で資源を循環させる仕組みはまだ限定的です。"ごみを減らす"を超えて、循環が当たり前に組み込まれた街へ。分断された資源の流れをつなぎ直し、新しい都市循環モデルを構想する。`,
+    asis:["大量廃棄","焼却依存","資源価格高騰","市民参加不足","企業ごとの点施策"],
+    tobe:["地域内で資源が循環する","廃棄コストが減る","市民参加が進む","企業活動が循環設計になる","環境負荷が減る"],
+    participants:[
+      {category:"食を地域内で循環させる人",sub:"有機農家・地産地消の実践者・食の地域流通を設計する人・農業×福祉×観光の実践者",question:"地域の食がお金ごと地域内を回る仕組みとは",byname:["福マルシェ","ローカルフードサイクリング"]},
+      {category:"廃棄物を資源に変える人",sub:"コンポスト・廃棄物資源化の実践者・フードロス×地域活用の事業者・有機廃棄物の循環設計者",question:"捨てるものを地域の資源に変えるモデルはつくれるか",byname:["エコミット"]},
+      {category:"建材・モノを地域で回す人",sub:"建材・木材の地域循環事業者・リユース・リペアの実践者・地域素材を使った建築家・職人",question:"建材・モノを地域内で何度も使い回す仕組みとは",byname:["HUB&STOCK","post & post"]},
+      {category:"地域経済を設計する人",sub:"地域商社・ローカルベンチャー・地域通貨・ふるさと納税の戦略設計者",question:"資源の循環をお金の循環と同時に設計するには",byname:["上勝町ゼロ・ウェイストセンターWHY","みんな電力"]},
+      {category:"消費者・文化を動かす人",sub:"地域ブランドをつくるクリエイター・地元産品の価値を伝えるメディア・域内消費を促すコミュニティ",question:"地元のものを地元で使うことを当たり前にするには",byname:["一般社団法人シェアリングエコノミー協会"]},
+    ]
+  },
+};
+
+function buildModal(d) {
+  const isObj = d.axis === 'obj';
+
+  const timelineHTML = d.timeline ? `
+    <div class="modal-timeline">
+      <div class="section-label" style="margin-bottom:14px">定着までのロードマップ</div>
+      <div class="timeline-row">
+        ${d.timeline.map(t=>`
+          <div class="timeline-item">
+            <div class="timeline-phase"><span class="timeline-phase-dot"></span>${t.phase}</div>
+            <div class="timeline-phase-text">${t.text}</div>
+          </div>`).join('')}
+      </div>
+    </div>` : '';
+
+  const rows = d.participants.map(p => {
+    const bn = p.byname.length
+      ? p.byname.map(n=>`<span class="byname-tag">${n}</span>`).join('')
+      : `<span style="font-size:11px;color:#c0c8e0">調整中</span>`;
+    return `<tr>
+      <td><div class="category-label">${p.category}</div><div class="category-sub">${p.sub}</div></td>
+      <td>${p.question}</td>
+      <td><div class="byname-list">${bn}</div></td>
+    </tr>`;
+  }).join('');
+
+  return `
+    <div class="modal-accent-bar ${d.axis}"></div>
+    <div class="modal-header">
+      <div class="modal-axis-tag ${d.axis}">${d.axisLabel}</div>
+      <div class="modal-title">${d.title}</div>
+      <div class="modal-headline">${d.headline}</div>
+      <div class="modal-desc">${d.desc}</div>
+    </div>
+    ${timelineHTML}
+    <div class="modal-transform">
+      <div class="section-label">変革の方向性</div>
+      <div class="transform-row">
+        <div class="transform-col asis">
+          <span class="transform-badge">AS IS</span>
+          <ul class="transform-list">${d.asis.map(i=>`<li>${i}</li>`).join('')}</ul>
+        </div>
+        <div class="transform-arrow-col">→</div>
+        <div class="transform-col tobe">
+          <span class="transform-badge">TO BE</span>
+          <ul class="transform-list">${d.tobe.map(i=>`<li>${i}</li>`).join('')}</ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-participants">
+      <div class="section-label">ご参加いただく方々のイメージ</div>
+      <div class="participants-note">※一部抜粋・お声がけ中の方も含みます</div>
+      <table class="participants-table">
+        <thead><tr><th>集まる人</th><th>持ち寄る視点や問い</th><th>参加者イメージ</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+const overlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
+
+document.querySelectorAll('.init-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const d = DATA[card.dataset.id];
+    if (!d) return;
+    modalContent.innerHTML = buildModal(d);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.init-card').forEach(card => {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.axis !== f);
+    });
+  });
+});
+</script>
+</body>
+</html>
