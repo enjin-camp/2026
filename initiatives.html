@@ -34,16 +34,18 @@ body {
   border-bottom: 1px solid var(--border);
   padding: 0 48px;
   height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   position: sticky; top: 0; z-index: 100;
+  transition: box-shadow 0.25s;
 }
-.logo { font-family: 'Nunito Sans', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 0.16em; text-decoration: none; color: var(--navy); }
+.site-header.scrolled { box-shadow: 0 2px 20px rgba(26,36,72,0.1); }
+.logo { font-family: 'Nunito Sans', sans-serif; font-size: 20px; font-weight: 800; letter-spacing: 0.16em; text-decoration: none; color: var(--navy); display: flex; align-items: baseline; gap: 6px; }
 .logo span { color: var(--teal); }
-.header-nav { display: flex; align-items: center; gap: 28px; }
-.header-link { font-size: 12px; letter-spacing: 0.12em; color: var(--sub); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.logo-year { font-family: 'Nunito Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; color: var(--sub); }
+.header-nav { display: flex; align-items: center; gap: 28px; justify-content: center; }
+.header-link { font-size: 12px; letter-spacing: 0.12em; color: var(--sub); text-decoration: none; text-transform: uppercase; transition: color 0.2s; padding-bottom: 3px; }
 .header-link:hover { color: var(--navy); }
-.header-link.active { color: var(--teal); font-weight: 500; }
-.header-badge { font-size: 11px; letter-spacing: 0.18em; color: var(--sub); border: 1px solid var(--border); padding: 5px 14px; border-radius: 20px; text-transform: uppercase; }
+.header-link.active { color: var(--teal); font-weight: 700; border-bottom: 2px solid var(--teal); }
 
 /* アクセントバー */
 .accent-bar { height: 4px; background: linear-gradient(90deg, #6244c5 0%, #2a6fd4 40%, #0aab94 100%); }
@@ -51,7 +53,7 @@ body {
 /* ヒーロー */
 .hero {
   text-align: center;
-  padding: 72px 40px 56px;
+  padding: 48px 40px 48px;
 }
 .hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.28em; color: var(--teal); text-transform: uppercase; margin-bottom: 24px; font-weight: 600; }
 .hero-tag::before, .hero-tag::after { content: ''; display: block; width: 28px; height: 1px; background: var(--teal); }
@@ -291,14 +293,13 @@ body {
 
 <!-- ヘッダー -->
 <header class="site-header">
-  <a class="logo" href="#">ENJIN<span>.</span>CAMP</a>
+  <a class="logo" href="#">ENJIN <span>CAMP</span><em class="logo-year">2026</em></a>
   <nav class="header-nav">
-    <a class="header-link" href="#">概要</a>
+    <a class="header-link" href="https://enjin-camp.github.io/2026/">イベント概要</a>
     <a class="header-link active" href="#">イニシアチブ</a>
-    <a class="header-link" href="#">参加者</a>
-    <a class="header-link" href="#">タイムライン</a>
+    <a class="header-link" href="https://enjin-camp.github.io/2026/members/">参加者</a>
   </nav>
-  <span class="header-badge">2026</span>
+  <div></div>
 </header>
 
 <!-- ヒーロー -->
@@ -634,6 +635,12 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
   });
 });
+
+// Sticky shadow on scroll
+const header = document.querySelector('.site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 4);
+}, { passive: true });
 </script>
 </body>
 </html>
