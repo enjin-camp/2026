@@ -81,6 +81,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:#c8d8f0;}
 .day-tab{padding:9px 32px;border-radius:28px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid #d0d5e8;color:#999;background:#fff;transition:all 0.2s;}
 .day-tab.active{background:#0d1a6b;border-color:#0d1a6b;color:#fff;}
 .day-tab:not(.active){background:#0fb8a0;border-color:#0fb8a0;color:#fff;}
+.day-concept{text-align:center;font-weight:700;font-size:18px;color:#0d1a6b;padding:16px 24px 4px;letter-spacing:0.04em;}
 .ct-inner{max-width:720px;margin:0 auto;padding:32px 32px 0;}
 .day-panel{display:none;}.day-panel.show{display:block;}
 .timeline{position:relative;padding-left:32px;}
@@ -297,6 +298,8 @@ body{font-family:'Noto Sans JP',sans-serif;background:#c8d8f0;}
     <div class="day-tab active" onclick="sw('day1',this)">DAY 1</div>
     <div class="day-tab" onclick="sw('day2',this)">DAY 2</div>
   </div>
+  <div class="day-concept" id="concept-day1">【DAY1】個別最適を超え、社会を動かす戦略を描く</div>
+  <div class="day-concept" id="concept-day2" style="display:none">【DAY2】一個人として、平和と向き合い、行動を起こす</div>
   <div class="ct-inner">
     <div class="day-panel show" id="day1">
       <div class="timeline" id="timeline-day1"><div style="padding:20px;color:#aab;font-size:13px;">読み込み中...</div></div>
@@ -306,7 +309,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:#c8d8f0;}
     </div>
   </div>
   <div class="initiatives-banner" style="padding:32px 24px 40px;">
-    <a href="./initiatives.html" class="initiatives-banner-btn">各イニシアチブの概要はこちら →</a>
+    <a href="./initiatives.html" class="initiatives-banner-btn">8つのイニシアチブはこちら →</a>
   </div>
 </section>
 
@@ -448,19 +451,25 @@ function driveThumb(url){
 }
 function initials(n){const p=n.trim().split(/[\s　]+/);return p.length>=2?(p[0][0]+p[1][0]).toUpperCase():n.slice(0,2).toUpperCase();}
 
-async function loadMembers(){
+function loadMembers(){
   const grid=document.getElementById('members-grid');
-  try{
-    const r=await fetch(GAS_URL+'?t='+Date.now(),{cache:'no-store'});
-    const d=await r.json();
-    if(!d.participants||!d.participants.length)return;
-    const sorted=[...d.participants].sort((a,b)=>(a.rowIndex??a.id)-(b.rowIndex??b.id)).slice(0,10);
-    grid.innerHTML=sorted.map(p=>{
-      const pu=driveThumb(p.photo);
-      const av=pu?`<img src="${pu}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">`:initials(p.name||'?');
-      return`<div class="pc"><div class="pc-av">${av}</div>${p.org?`<div class="pc-org">${p.org}</div>`:''}<div class="pc-name">${p.name||'—'}さん</div></div>`;
-    }).join('');
-  }catch(e){console.error(e);}
+  const members=[
+    {name:'古田秘馬',   role:'代表',          org:'株式会社umari',                              photo:'1NQpegE9iM7kGKslFXR5KC-WGtd8KHl7_'},
+    {name:'深井龍之介', role:'代表取締役CEO', org:'株式会社COTEN',                               photo:'1w2IszjwpYE9S2mDa2xJ5f9dww7SqRN7B'},
+    {name:'井上高志',   role:'代表取締役会長', org:'株式会社LIFULL',                             photo:'1oI_Qa5sY4YB2eFVgDqge5uBCrQkfOqoZ'},
+    {name:'小沼大地',   role:'代表理事',       org:'NPO法人クロスフィールズ / 新公益連盟',       photo:'1creNQOQhvspfceKsad4wMPHr46MfSH_-'},
+    {name:'鬼丸昌也',   role:'理事・創設者',   org:'認定NPO法人テラ・ルネッサンス',              photo:'186MOZ3wwbXyUut7gYIcXFfHi5vSU-Gzz'},
+    {name:'増村江利子', role:'greenz.jp編集長', org:'特定非営利活動法人グリーンズ',              photo:'11CzwaxE55RaxC151KYWCVbhVsBFdwevq'},
+    {name:'高橋大就',   role:'代表',           org:'一般社団法人東の食の会',                     photo:'1LeIeSoG7vGM6D6VpoSp0alXkxH8hFI-F'},
+    {name:'三島理恵',   role:'理事長',         org:'認定NPO法人全国こども食堂支援センター・むすびえ', photo:'1rYQ3vglkkkdnEIaiSrLJiXOgXGGMitHW'},
+    {name:'田口一成',   role:'CEO',            org:'株式会社ボーダレス・ジャパン',               photo:'1L2m9uI6O7dsvlVg_CtkuHZKUWroyuouE'},
+    {name:'福田晋平',   role:'グループリーダー', org:'ヤマハ発動機株式会社',                     photo:'1IAdPuFf5wWUuG4zI14-XbETSpMbdFYVj'},
+  ];
+  grid.innerHTML=members.map(p=>{
+    const pu=`https://drive.google.com/thumbnail?id=${p.photo}&sz=w200`;
+    const av=`<img src="${pu}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">`;
+    return`<div class="pc"><div class="pc-av">${av}</div><div class="pc-org">${p.org}</div><div class="pc-name">${p.name}さん</div></div>`;
+  }).join('');
 }
 
 // VOICE初期スクロール位置（高木さん・Daijuさんが中心）
@@ -484,6 +493,8 @@ function sw(id,btn){
   document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('show'));
   document.querySelectorAll('.day-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('show');btn.classList.add('active');
+  document.getElementById('concept-day1').style.display = id==='day1' ? '' : 'none';
+  document.getElementById('concept-day2').style.display = id==='day2' ? '' : 'none';
 }
 
 loadProgram();loadMembers();
