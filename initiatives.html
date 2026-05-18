@@ -272,8 +272,57 @@ body {
   padding: 3px 10px; border-radius: 20px; white-space: nowrap;
 }
 
+/* 構造図 */
+.structure-diagram {
+  max-width: 860px; margin: 0 auto 48px; padding: 0 40px;
+}
+.structure-wrapper {
+  background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 16px; margin-bottom: 24px;
+}
+.structure-inner {
+  display: flex; gap: 12px; margin-bottom: 12px;
+}
+.structure-axis-group { display: flex; flex-direction: column; gap: 0; }
+.structure-axis-group.obj { flex: 5; }
+.structure-axis-group.str { flex: 3; }
+.structure-axis-header {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+  text-align: center; padding: 10px; border-radius: 6px;
+}
+.structure-axis-header.obj { background: var(--navy); color: #fff; }
+.structure-axis-header.str { background: var(--navy); color: #fff; }
+.structure-cards {
+  display: flex; gap: 6px; padding: 10px 0 0;
+  background: #fff; flex: 1;
+}
+.structure-card {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-size: 12px; font-weight: 500; color: var(--navy);
+  border: 1.5px solid var(--border); border-radius: 4px;
+  padding: 14px 8px; background: #f8f9fd;
+  height: 190px; width: 0; flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: 0.06em; text-align: center;
+}
+.structure-crossborder {
+  border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 18px 24px; background: #f8f9fd;
+  text-align: center;
+}
+.crossborder-label {
+  font-size: 14px; font-weight: 700; color: var(--navy); letter-spacing: 0.08em; margin-bottom: 4px;
+}
+.crossborder-sub { font-size: 12px; color: var(--sub); letter-spacing: 0.04em; }
+.crossborder-desc-title {
+  font-size: 11px; font-weight: 700; color: var(--navy); margin: 10px 0 8px; letter-spacing: 0.04em;
+}
+.crossborder-desc-text { font-size: 11px; color: var(--sub); line-height: 1.8; letter-spacing: 0.04em; }
+
 /* レスポンシブ */
 @media (max-width: 768px) {
+  .structure-inner { grid-template-columns: 1fr; }
+  .structure-diagram { padding: 0 20px; }
   .site-header { padding: 0 20px; }
   .header-nav { display: none; }
   .hero { padding: 48px 20px 36px; }
@@ -306,13 +355,48 @@ body {
 <section class="hero">
   <div class="hero-tag">Initiatives</div>
   <h1 class="hero-title">8つのイニシアチブ</h1>
-  <p class="hero-subtitle">社会を前に進めるための設計図を描く</p>
+  <p class="hero-subtitle"><strong>希望がめぐる社会のグランドデザインを描く</strong></p>
   <p class="hero-desc">
-    バラバラに存在している社会へのアプローチを繋げ直して<br>
-    社会を動かすための"共通の戦略（グランドデザイン）と役割"を描き、<br>
-    アクションを生み出すことを目指します
+    優れた実践は、すでに各地で生まれている。それでも社会課題が複雑化する今、<br>
+    一つの組織、一つの取り組みだけで社会を大きく動かすことは難しくなっています。<br><br>
+    だからこそ必要なのは、それぞれの持ち場を社会全体を前に進める戦略の中で再定義し<br>
+    新たな共創やアクションを生み出すこと。<br><br>
+    1日目のENJINイニシアチブでは、特定の当事者課題を深く議論する「対象軸」と<br>
+    社会の仕組みそのものを見直す「構造軸」の8つのイニシアチブを通じて<br>
+    自分たちの実践を社会全体を動かす一手へと変えていきます。
   </p>
 </section>
+
+<!-- イニシアチブ構造図 -->
+<div class="structure-diagram">
+  <div class="structure-wrapper">
+    <div class="structure-inner">
+      <div class="structure-axis-group obj">
+        <div class="structure-axis-header obj">対象軸</div>
+        <div class="structure-cards">
+          <div class="structure-card">不登校の子ども</div>
+          <div class="structure-card">貧困家庭のこども</div>
+          <div class="structure-card">介護未満の高齢者</div>
+          <div class="structure-card">就労困難な<br>社会的弱者</div>
+          <div class="structure-card">日本に暮らす<br>外国人労働者・移民</div>
+        </div>
+      </div>
+      <div class="structure-axis-group str">
+        <div class="structure-axis-header str">構造軸</div>
+        <div class="structure-cards">
+          <div class="structure-card">生態系が崩れた<br>森林・流域の再設計</div>
+          <div class="structure-card">持続可能な<br>地域自治の再設計</div>
+          <div class="structure-card">サーキュラーな街づくり</div>
+        </div>
+      </div>
+    </div>
+    <div class="structure-crossborder">
+      <div class="crossborder-label">クロスボーダー人材</div>
+      <div class="crossborder-desc-title">領域を超えるプレイヤーが、社会実装を加速させる</div>
+      <p class="crossborder-desc-text">資金提供、人材支援、メディア、マーケティング、ブランディング、テクノロジー、政策設計など、<br>領域横断で社会に関わるプロフェッショナルの皆さまには、各イニシアチブに分かれて参加いただきます。<br>当事者や業界関係者だけでは見えにくい構造課題を問い直し、<br>他領域の知見や資源を持ち寄りながら、新たな実装の可能性を広げていく存在です。</p>
+    </div>
+  </div>
+</div>
 
 <!-- フィルター -->
 <div class="filter-section">
@@ -360,7 +444,7 @@ body {
     <div class="init-card" data-axis="obj" data-id="shogai" style="animation-delay:0.2s">
       <div class="card-inner">
         <div class="card-axis-tag">対象軸</div>
-        <div class="card-title">就労困難な障がい者</div>
+        <div class="card-title">就労困難な社会的弱者</div>
         <div class="card-tagline">働く機会の設計を変え、<br>排除されない社会をつくるには</div>
         <div class="card-cta"><span class="card-cta-text">詳しく見る <span class="cta-arrow">→</span></span></div>
       </div>
@@ -423,8 +507,8 @@ const DATA = {
     asis:["学校復帰前提","親の孤立","地域資源不足","卒業後不安","学びの選択肢格差"],
     tobe:["多様な学びが認められる","子どもの社会接点がある","親も支援される","卒業後の進路がある","地域全体で支える"],
     participants:[
-      {category:"居場所・学びをつくる人",sub:"フリースクール・オルタナティブスクール運営者・子どもの居場所づくりのNPO・学習支援の実践者",question:"学校以外の学びの場をどうつくり、どう続けるか",byname:["夢中教室","TeacherTeacher"]},
-      {category:"家族・保護者を支える人",sub:"ひとり親・不登校家庭のコミュニティ支援者・親向けカウンセラー・家族支援NPO",question:"親が孤立しない仕組みをどうつくるか",byname:["Gifted Creativ","パーソルキャリア","カタリバ"]},
+      {category:"居場所・学びをつくる人",sub:"フリースクール・オルタナティブスクール運営者・子どもの居場所づくりのNPO・学習支援の実践者",question:"学校以外の学びの場をどうつくり、どう続けるか",byname:["夢中教室","TeacherTeacher","うみのこてらす","すみなす"]},
+      {category:"家族・保護者を支える人",sub:"ひとり親・不登校家庭のコミュニティ支援者・親向けカウンセラー・家族支援NPO",question:"親が孤立しない仕組みをどうつくるか",byname:["Gifted Creativ","カタリバ"]},
       {category:"学校・制度を変える人",sub:"文科省・教育委員会の担当者・学校改革の実践者・出席認定制度の改革者・こども家庭庁",question:"制度の中に多様な学びをどう位置づけるか",byname:["文部科学省","こども家庭庁","デロイトトーマツ","自治体教育長"]},
       {category:"受け皿になる人",sub:"多様なキャリアを認める企業のHR担当・職業体験・インターンを提供する企業・社会起業家",question:"企業が受け皿になれば子どもの将来不安は減るか",byname:["ベネッセ"]},
       {category:"テクノロジーで学びを広げる人",sub:"EdTechスタートアップ・AI個別最適化学習の実践者・メタバース教育・オンライン学習プラットフォーム",question:"テクノロジーで学びの選択肢をどこまで広げられるか",byname:["ライフイズテック"]},
@@ -434,17 +518,17 @@ const DATA = {
   hinkon: {
     axis:"obj", axisLabel:"対象軸",
     title:"貧困家庭のこども・ひとり親",
-    headline:"貧困の連鎖を断ち切る、<br>包括支援モデルをつくる",
-    desc:`日本では、7人に1人の子どもが相対的貧困状態にあると言われる中、経済的困難だけでなく、教育格差、体験格差、情報格差、孤立など、複数の課題が家庭の中で複雑に重なっている。<br><br>一方で、支援は学習、食事、就労、福祉など領域ごとに分断され、困難が深刻化してから初めて支援につながるケースも少なくない。子どもだけでも、親だけでもなく、家族全体を支えながら未来の選択肢を広げる社会へ。分断された支援をつなぎ直し、貧困の連鎖を防ぐ新しい仕組みを構想する。`,
-    asis:["支援につながる時には深刻化している","子どもの教育・体験格差","親の就労不安定","支援情報が届かない","支援が縦割り"],
-    tobe:["早期支援につながる","子どもの機会が保障される","親が安定して働ける","家庭全体を支えられる","貧困の連鎖が断ち切られる"],
+    headline:"変化する貧困構造に備える、<br>新しいセーフティネットを構想する",
+    desc:`AIの進化によって、雇用構造・必要なスキル・情報環境は急速に変化している。ホワイトカラー職の縮小、中間層の不安定化、SNS・AIによる思考格差の拡大により、これまで支援対象ではなかった家庭が新たに困窮へ向かう可能性も高まっている。<br><br>「大学に行けば安定」「正社員になれば安心」という従来の上昇モデルは揺らぎ始めている今、子どもたちにどんな学び・経験・選択肢が必要なのか。親世代の再就労やリスキリングをどう支えるのか。そして、新たな貧困を生まないために、どんな社会的セーフティネットが必要なのか。<br><br>目の前の支援をつなぎ直すだけではなく、これから生まれる貧困構造を見据えた、新しい社会設計を議論する。`,
+    asis:["困窮後の支援が中心","教育格差・体験格差","親の就労不安定","情報/AIリテラシー格差","中間層の転落リスク増加","既存の自立モデルの限界"],
+    tobe:["困窮前の予防支援","子どもの機会保障","親の再挑戦機会","新しい職業教育","柔軟なセーフティネット","貧困の連鎖・新規流入の防止"],
     participants:[
-      {category:"食・居場所で直接支える側",sub:"子ども食堂・フードパントリー運営者・フードバンク・学習支援NPO・地域の見守り実践者",question:"食と居場所を起点にどこまで支援を広げられるか",byname:["NPO法人CLACK"]},
-      {category:"ひとり親の就労を支える側",sub:"ひとり親向けキャリア支援NPO・人材派遣・ファミリーサポートの実践者・保育事業者",question:"親が安定すれば子どもが安定する。親支援をどう設計するか",byname:["パーソルキャリア","フローレンス","LivEQuality","ネッスー"]},
-      {category:"学習・進路をひらく側",sub:"給付型奨学金の運営者・無料塾・オルタナティブ教育・進路多様化を支援する実践者",question:"お金がなくても進路の選択肢を持てる仕組みとは",byname:["チャンス・フォー・チルドレン","Learning for All","かものはしプロジェクト","カタリバ"]},
+      {category:"食・居場所で直接支える側",sub:"子ども食堂・フードパントリー運営者・フードバンク・学習支援NPO・地域の見守り実践者",question:"食と居場所を起点にどこまで支援を広げられるか",byname:["D×P","ネッスー"]},
+      {category:"ひとり親の就労を支える側",sub:"ひとり親向けキャリア支援NPO・人材派遣・ファミリーサポートの実践者・保育事業者",question:"親が安定すれば子どもが安定する。親支援をどう設計するか",byname:["パーソルキャリア","フローレンス","LivEQuality"]},
+      {category:"学習・進路をひらく側",sub:"給付型奨学金の運営者・無料塾・オルタナティブ教育・進路多様化を支援する実践者",question:"お金がなくても進路の選択肢を持てる仕組みとは",byname:["チャンス・フォー・チルドレン","Learning for All","かものはしプロジェクト","カタリバ","CLACK"]},
       {category:"企業・流通が支援に関わる側",sub:"食品・流通（フードロス活用）・企業の社会貢献担当・フェアトレード×子ども支援",question:"企業のリソースを子ども支援にどうつなぐか",byname:["西濃運輸"]},
       {category:"お金の仕組みを変える側",sub:"インパクト投資家・社会的金融・クラウドファンディング型支援プラットフォーム",question:"子どもの貧困にどうお金を流すか",byname:["PwC財団"]},
-      {category:"文化・制度を変える側",sub:"こども家庭庁・厚労省・教育委員会・子どもの権利を発信するメディア・当事者",question:"自己責任論を覆し、社会全体の問題として共有するには",byname:["厚生労働省","こども家庭庁"]},
+      {category:"文化・制度を変える側",sub:"こども家庭庁・厚労省・教育委員会・子どもの権利を発信するメディア・当事者",question:"自己責任論を覆し、社会全体の問題として共有するには",byname:["こども家庭庁"]},
     ]
   },
   kaigo: {
@@ -455,8 +539,8 @@ const DATA = {
     asis:["介護が必要になってから支援が始まる","元気な高齢者の役割が少ない","地域は担い手不足","都市には経験あるミドル人材が偏在"],
     tobe:["要介護前から地域との接点がある","高齢者が小さな役割を持ち続けられる","地域に担い手が循環する","都市の経験資本が地域に還流する"],
     participants:[
-      {category:"日常の接点でつながる人",sub:"コミュニティナース・民生委員・地域の商店・配食事業者・訪問型サービスの実践者",question:"日常の中でどう孤立や異変を早期発見するか",byname:["CNC","兵庫ヤクルト販売","エイジウェル"]},
-      {category:"居場所をつくる人",sub:"居場所・サロン運営者・コミュニティデザイナー・多世代交流の実践者・社会的処方の実践者",question:"役割を持てる居場所をどう設計するか",byname:["ぐるんとびー","えんがお","Relight"]},
+      {category:"日常の接点でつながる人",sub:"コミュニティナース・民生委員・地域の商店・配食事業者・訪問型サービスの実践者",question:"日常の中でどう孤立や異変を早期発見するか",byname:["CNC","兵庫ヤクルト販売","Relight"]},
+      {category:"居場所をつくる人",sub:"居場所・サロン運営者・コミュニティデザイナー・多世代交流の実践者・社会的処方の実践者",question:"役割を持てる居場所をどう設計するか",byname:["ぐるんとびー","えんがお"]},
       {category:"健康を支える人",sub:"フレイル予防の実践者・リハビリ/機能訓練事業者・予防医療・ヘルスケア事業者",question:"身体的・精神的・社会的健康をどう維持できるか",byname:["厚生労働省"]},
       {category:"人材を地域に循環させる人",sub:"関係人口創出の実践者・越境学習・大企業人事・二拠点居住支援・地域マッチング事業者",question:"都市の経験人材を、どう地域の担い手に変えられるか",byname:["クラブツーリズム","クロスフィールズ"]},
       {category:"制度・仕組みを変える人",sub:"中央省庁・自治体・保険・金融・研究者",question:"予防にお金が流れる仕組みをどう作るか",byname:["経産省"]},
@@ -464,17 +548,17 @@ const DATA = {
   },
   shogai: {
     axis:"obj", axisLabel:"対象軸",
-    title:"就労困難な障がい者",
+    title:"就労困難な社会的弱者",
     headline:"能力ではなく仕事の設計を問い直し、<br>誰もが役割を持てる仕事社会へ",
     desc:`障害の有無、病気、育児・介護、精神的な困難。働く意欲や能力があっても、現在の働き方や仕事の設計によって、社会参加の機会から排除されている人がいる。<br><br>一方で、多くの企業では「この人に何ができるか」という供給起点で仕事を考えがちで、持続的な需要創出や新しい仕事設計まで踏み込めていない。"働けない人"がいるのではなく、今の仕事の設計そのものに課題があるのではないか。分断された仕事と人材をつなぎ直し、誰もが役割を持てる新しい就労モデルを構想する。`,
     asis:["手帳前提の制度設計","障害者雇用の数合わせ化","「雇うこと」が目的化","需要側の設計不足","働きづらい人の対象が限定的に捉えられる"],
     tobe:["仕事起点で設計される","多様な人が役割を持てる","持続的な需要がある","社会参加機会が増える","「働けない」という固定観念がなくなる"],
     participants:[
-      {category:"就労の場をつくる側",sub:"就労継続支援事業所の改革者・就労移行支援の実践者",question:"採算が合い、当事者が輝ける就労モデルとは",byname:["UNROOF","コトブキ印刷","みんなのベース","ローランズ","フローレンス"]},
+      {category:"就労の場をつくる側",sub:"就労継続支援事業所の改革者・就労移行支援の実践者",question:"採算が合い、当事者が輝ける就労モデルとは",byname:["UNROOF","コトブキ印刷","みんなのベース","ローランズ"]},
       {category:"企業の雇用を変える側",sub:"法定雇用率対応の大企業HR・特例子会社",question:"義務から共創へ。企業の障がい者雇用をどう変えるか",byname:["ゼネラルパートナーズ","マリモホールディングス"]},
-      {category:"新しい価値を生み出す側",sub:"障がいアート×ビジネスの実践者・ソーシャルビジネス事業者",question:"障がいを「多様性」として市場価値に変えられるか",byname:["ヘラルボニー","すみなす"]},
-      {category:"当事者の声を届ける側",sub:"当事者・家族の発信者・障がい者権利活動家",question:"当事者が設計の主体になるためには何が必要か",byname:[]},
-      {category:"テクノロジーで就労を広げる側",sub:"テレワーク×障がい者雇用のスタートアップ・支援テクノロジーの実践者",question:"テクノロジーで就労の場をどこまで広げられるか",byname:["オリイ研究所","テクノツール"]},
+      {category:"新しい価値を生み出す側",sub:"障がいアート×ビジネスの実践者・ソーシャルビジネス事業者",question:"障がいを「多様性」として市場価値に変えられるか",byname:["すみなす"]},
+
+      {category:"就労機会を広げる側",sub:"テレワーク×障がい者雇用のスタートアップ・支援テクノロジーの実践者",question:"テクノロジーで就労の場をどこまで広げられるか",byname:["オリイ研究所","テクノツール","フローレンス"]},
       {category:"制度・法律を変える側",sub:"厚労省（障害者雇用促進担当）・自治体・研究者",question:"法定雇用率・報酬体系をどう変えれば現場が動くか",byname:[]},
     ]
   },
@@ -492,9 +576,9 @@ const DATA = {
     asis:["人手不足産業の穴埋めとして受け入れ","日本語教育不足","住居/医療/子育て/教育が分断","技能実習制度依存","地域との接点不足"],
     tobe:["長期的に暮らせる","家族形成できる","地域コミュニティに所属できる","キャリアアップ可能","多文化共生が当たり前"],
     participants:[
-      {category:"来日直後を支える",sub:"生活相談・住居・日本語・行政手続きの実践者",question:"来た初日から困らない状態をどうつくるか",byname:["Welcome Japan","GTN（グローバルトラストネットワークス）","むすびば"]},
+      {category:"来日直後を支える",sub:"生活相談・住居・日本語・行政手続きの実践者",question:"来た初日から困らない状態をどうつくるか",byname:["Welcome Japan","グローバルトラストネットワークス","むすびば"]},
       {category:"仕事をつくる",sub:"中小・農業・介護など現場雇用者、就労支援実践者",question:"安心して働ける職場をどう設計するか",byname:["ZERO PC","NINAITE","モンスターラボ"]},
-      {category:"家族と子どもを支える",sub:"子どもの教育・保育・医療アクセスの実践者",question:"家族ごと根を張れる環境をどうつくるか",byname:["一般社団法人 YOU MAKE IT","カタリバ Rootsプロジェクト"]},
+      {category:"家族と子どもを支える",sub:"子どもの教育・保育・医療アクセスの実践者",question:"家族ごと根を張れる環境をどうつくるか",byname:["YOU MAKE IT","カタリバ"]},
       {category:"関係性・文化をつくる",sub:"多文化共住・地域共生の設計者",question:"隣人として出会える場をどうつくるか",byname:["ボーダレスハウス"]},
       {category:"制度を変える",sub:"入管・法務省・研究者・行政書士",question:"在留制度をどう人間的なものに変えるか",byname:["内閣府","PoliPoli"]},
     ]
@@ -512,7 +596,7 @@ const DATA = {
       {category:"生態系の価値をお金にする側",sub:"カーボンクレジット・生態系サービス評価の専門家・インパクト投資家・森林ファンド",question:"自然資本をどう価値化し、投資を呼び込むか",byname:["エーゼロ"]},
       {category:"流域をつなぐ側",sub:"生態学・流域管理の研究者・野生動物の専門家・森と海のつながりを研究する科学者",question:"流域全体を一つのシステムとして誰が管理するか",byname:["Wildlife Ventures"]},
       {category:"関係人口・文化をつくる側",sub:"森の関係人口づくりの実践者・自然体験教育・リジェネラティブ文化を発信する実践者",question:"都市と森をつなぐ接点をどう設計するか",byname:["greenz.jp","やまとわ"]},
-      {category:"制度・縦割りを変える側",sub:"環境省・林野庁・国交省の担当者・森林環境譲与税を活用する自治体担当・流域管理推進者",question:"縦割りを超えた流域管理体制をどう制度化するか",byname:["環境省","林野庁"]},
+      {category:"制度・縦割りを変える側",sub:"環境省・林野庁・国交省の担当者・森林環境譲与税を活用する自治体担当・流域管理推進者",question:"縦割りを超えた流域管理体制をどう制度化するか",byname:["環境省"]},
     ]
   },
   jichi: {
